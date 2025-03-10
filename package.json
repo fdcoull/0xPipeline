@@ -1,0 +1,27 @@
+{
+  "name": "0xpipeline",
+  "version": "0.1.0",
+  "description": "A blockchain based supply chain management system.",
+  "main": "hardhat.config.js",
+  "scripts": {
+    "test": "npx hardhat test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fdcoull/0xPipeline.git"
+  },
+  "keywords": [
+    "blockchain",
+    "ethereum",
+    "supply",
+    "chain",
+    "management",
+    "system"
+  ],
+  "author": "F D Coull",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fdcoull/0xPipeline/issues"
+  },
+  "homepage": "https://github.com/fdcoull/0xPipeline#readme"
+}
