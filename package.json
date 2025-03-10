@@ -23,5 +23,9 @@
   "bugs": {
     "url": "https://github.com/fdcoull/0xPipeline/issues"
   },
-  "homepage": "https://github.com/fdcoull/0xPipeline#readme"
+  "homepage": "https://github.com/fdcoull/0xPipeline#readme",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.22.19"
+  }
 }
