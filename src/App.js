@@ -18,6 +18,7 @@ import config from './config.json';
 function App() {
   const [provider, setProvider] = useState(null);
   const [contract, setContract] = useState(null);
+  const [account, setAccount] = useState(null);
   const [name, setName] = useState('');
   
   const loadBlockchainData = async () => {
@@ -36,6 +37,18 @@ function App() {
     setName(name);
   }
 
+  // Connect to metamask wallet
+  const connectHandler = async () => {
+    // Get accounts array
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+
+    // Get first account in array
+    const account = ethers.getAddress(accounts[0]);
+
+    setAccount(account);
+  }
+
+  // Load blockchain data and hook into component
   useEffect(() => {
     loadBlockchainData();
   }, []);
@@ -44,6 +57,14 @@ function App() {
     <div>
       <h2>Welcome to 0xPipeline!</h2>
       <h3>Contract name: {name}</h3>
+
+      {/* If account is true, then create button with address, else create connect button*/}
+      {account ? (
+        <button type="button">{account}</button>
+      ) : (
+        <button type="button" onClick={connectHandler}>Connect</button>
+      )}
+
     </div>
   );
 }
