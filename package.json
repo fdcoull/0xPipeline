@@ -4,7 +4,8 @@
   "description": "A blockchain based supply chain management system.",
   "main": "hardhat.config.js",
   "scripts": {
-    "test": "npx hardhat test"
+    "test": "npx hardhat test",
+    "start": "react-scripts start"
   },
   "repository": {
     "type": "git",
@@ -23,14 +24,28 @@
   "bugs": {
     "url": "https://github.com/fdcoull/0xPipeline/issues"
   },
-  "homepage": "https://github.com/fdcoull/0xPipeline#readme",
+  "homepage": ".",
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
     "hardhat": "^2.22.19",
     "react-scripts": "^5.0.1"
   },
   "dependencies": {
+    "ethers": "^6.13.5",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "web-vitals": "^4.2.4"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
