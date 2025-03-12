@@ -40,5 +40,13 @@ contract MaterialControl {
         materials[_id] = material;
     }
 
+    // Add batch to material entry
+    function addBatch(
+        uint256 _id,
+        uint256 _quantity
+    ) public onlyOwner {
+        materials[_id].quantity += _quantity;
+    }
+
 
 }
