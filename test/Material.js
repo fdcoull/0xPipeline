@@ -71,6 +71,36 @@ describe("Material Control", function () {
         });
     });
 
+    describe("Purchases", function () {
+        beforeEach(async () => {
+            // Add to stock
+            transaction = await materialControl.connect(deployer).addBatch(ID, 10);
+            await transaction.wait();
+
+            // Create order
+            const buyQuantity = 5;
+            transaction = await materialControl.connect(buyer).buy(ID, buyQuantity, {value: buyQuantity * COST});
+            await transaction.wait();
+
+        });
+
+        it("Adds an order", async function () {
+            // Check blockchain for order
+            const order = await materialControl.orders(1);
+            expect(order.time).to.be.greaterThan(0);
+        });
+
+        it("Adds payment to contract balance", async function () {
+            const result = await ethers.provider.getBalance(materialControl.target);
+            expect(result).to.equal(COST * 5);
+        });
+
+        it("Reduces stock", async function () {
+            const material = await materialControl.materials(ID);
+            expect(material.quantity).to.equal(10 - 5);
+        });
+    });
+
     // describe("Deployment", function () { });
     // it("Has a name", async function () { });
 })
