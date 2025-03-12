@@ -5,7 +5,13 @@ const {
 const { anyValue } = require("@nomicfoundation/hardhat-chai-matchers/withArgs");
 const { expect } = require("chai");
 
-describe("Material Manager", function () {
+const ID = 1;
+const NAME = "Iron";
+const QUANTITY = 0;
+const QUANTITY_UNIT = "KG";
+const COST = "5";
+
+describe("Material Control", function () {
     let materialControl;
     let deployer, buyer;
 
@@ -19,6 +25,31 @@ describe("Material Manager", function () {
         it("Sets the owner", async function () {
             const owner = await materialControl.owner();
             expect(owner).to.equal(deployer.address);
+        });
+    });
+
+    describe("List material", function () {
+        let transaction
+
+        beforeEach(async () => {
+            transaction = await materialControl.connect(deployer).list(
+                ID,
+                NAME,
+                QUANTITY,
+                QUANTITY_UNIT,
+                COST
+            );
+
+            await transaction.wait();
+        });
+
+        it("Returns material details", async function () {
+            const material = await materialControl.materials(ID)
+
+            expect(material.name).to.equal(NAME);
+            expect(material.quantity).to.equal(QUANTITY);
+            expect(material.quantity_unit).to.equal(QUANTITY_UNIT);
+            expect(material.cost).to.equal(COST);
         });
     });
 
