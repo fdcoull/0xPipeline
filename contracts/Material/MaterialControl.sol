@@ -20,8 +20,6 @@ contract MaterialControl {
         address buyer;
     }
 
-    
-
     // Mappings
     mapping(uint256 => Material) public materials;
     mapping(uint256 => Order) public orders;
