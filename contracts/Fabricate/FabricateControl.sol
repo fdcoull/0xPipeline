@@ -86,6 +86,11 @@ contract FabricateControl {
         products[_id] = Product(_name, 0, _quantity_unit, _cost);
     }
 
+    // Get BOM by ID
+    function getBom(uint256 _id) public view returns (Component[] memory) {
+        return boms[_id];
+    }
+
     // Manufacture product
     function manufactureProduct(uint256 _id, uint256 _quantity) public onlyOwner {
         Component[] memory bom = boms[_id];
