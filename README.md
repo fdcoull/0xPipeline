@@ -3,6 +3,8 @@
 ## Changelog
 ### 0.4.0
 * Added logo to readme
+* Transport control added
+* Transport control tested
 
 ### 0.3.0
 * Fabricate control added
