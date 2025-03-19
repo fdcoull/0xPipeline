@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.28;
 
-contract Transport {
+contract TransportControl {
     address public owner;
+    uint256 shipmentCount;
+    uint256[4] public prices;
 
     // Enums
     enum Status {Pending, InBound, Shipped, Received, Cancelled}
@@ -27,10 +29,10 @@ contract Transport {
         owner = msg.sender;
         shipmentCount = 0;
 
-        prices[Method.Standard] = 1;
-        prices[Method.TwoDay] = 2;
-        prices[Method.NextDay] = 3;
-        prices[Method.Weekend] = 4;
+        prices[uint256(Method.Standard)] = 1;
+        prices[uint256(Method.TwoDay)] = 2;
+        prices[uint256(Method.NextDay)] = 3;
+        prices[uint256(Method.Weekend)] = 4;
     }
 
     // Modifiers
@@ -42,7 +44,7 @@ contract Transport {
 
     // Create shipment
     function ship(uint256 _senderOrderNo, uint256 _weight, address _recipient, Method _method) public payable {
-        uint256 cost = prices[_method];
+        uint256 cost = prices[uint256(_method)];
         Shipment memory shipment = Shipment(msg.sender, _senderOrderNo, _weight, _recipient, Status.Pending, _method, cost);
 
         // Require payment to be over or equal to method price
