@@ -1,6 +1,9 @@
-# 0xPipeline
+![alt text](public/logo-full.png)
 
 ## Changelog
+### 0.4.0
+* Added logo to readme
+
 ### 0.3.0
 * Fabricate control added
 * Fabricate control tested
