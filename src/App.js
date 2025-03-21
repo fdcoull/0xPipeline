@@ -53,20 +53,59 @@ function App() {
     loadBlockchainData();
   }, []);
 
+  const [view, setView] = useState("home");
+
   return (
     <div>
-      <h2>Welcome to 0xPipeline!</h2>
-      <h3>Contract name: {name}</h3>
-
-      {/* If account is true, then create button with address, else create connect button*/}
-      {account ? (
-        <button type="button">{account}</button>
-      ) : (
-        <button type="button" onClick={connectHandler}>Connect</button>
+      {/* Navbar only shows when not on home view */}
+      {view !== "home" && (
+        <nav>
+          {view === "material" && (
+            <>
+              <button onClick={() => setView("home")}>Home</button>
+              <button onClick={() => setView("test1")}>Test1</button>
+            </>
+          )}
+          {view === "fabricate" && (
+            <>
+              <button onClick={() => setView("home")}>Home</button>
+              <button onClick={() => setView("test2")}>Test2</button>
+            </>
+          )}
+          {view === "transport" && (
+            <>
+              <button onClick={() => setView("home")}>Home</button>
+              <button onClick={() => setView("test2")}>Test3</button>
+            </>
+          )}
+        </nav>
       )}
 
+      {/* View Rendering */}
+      {view === "home" && <Home setView={setView} />}
+      {view === "material" && <Material setView={setView} />}
+      {view === "fabricate" && <Fabricate setView={setView} />}
+      {view === "transport" && <Transport setView={setView} />}
     </div>
+
   );
 }
+
+const Home = ({ setView }) => (
+  <div>
+  <h1>Home Page</h1>
+
+  <nav>
+  <button onClick={() => setView("home")}>Home</button>
+  <button onClick={() => setView("material")}>Material</button>
+  <button onClick={() => setView("fabricate")}>Fabricate</button>
+  <button onClick={() => setView("transport")}>Transport</button>
+  </nav>
+  </div>
+);
+
+const Material = ({ setView }) => <h1>Material Page</h1>;
+const Fabricate = ({ setView }) => <h1>Fabricate page</h1>;
+const Transport = ({ setView }) => <h1>Transport page</h1>
 
 export default App;
