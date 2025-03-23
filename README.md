@@ -4,7 +4,13 @@
 ### 0.5.0
 * Remove Lock contract
 * Remove Test contract
-* Add frontend structure
+* Frontend structure defined
+* Components and pages added
+* Navbar component added
+* Home page created
+* Material page created
+* Fabricate page created
+* Transport page created
 
 ### 0.4.0
 * Added logo to readme
