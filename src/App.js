@@ -22,6 +22,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Material from './pages/Material';
 import Fabricate from './pages/Fabricate';
+import Transport from './pages/Transport';
 
 function App() {
   const [provider, setProvider] = useState(null);
@@ -76,7 +77,5 @@ function App() {
 
   );
 }
-
-const Transport = ({ setView }) => <h1>Transport page</h1>
 
 export default App;
