@@ -18,6 +18,9 @@ import config from './config.json';
 // Components
 import Navbar from "./components/Navbar";
 
+// Pages
+import Material from "./pages/Material";
+
 function App() {
   const [provider, setProvider] = useState(null);
   const [contract, setContract] = useState(null);
@@ -85,7 +88,6 @@ const Home = ({ setView }) => (
   </div>
 );
 
-const Material = ({ setView }) => <h1>Material Page</h1>;
 const Fabricate = ({ setView }) => <h1>Fabricate page</h1>;
 const Transport = ({ setView }) => <h1>Transport page</h1>
 
