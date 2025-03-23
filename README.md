@@ -3,7 +3,8 @@
 ## Changelog
 ### 0.6.0
 * Remove react default logos
-* Add favico
+* Added favico
+* React Bootstrap installed
 
 ### 0.5.0
 * Remove Lock contract
