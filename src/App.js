@@ -16,10 +16,11 @@ import Test from './abis/Test.json';
 import config from './config.json';
 
 // Components
-import Navbar from "./components/Navbar";
+import Navbar from './components/Navbar';
 
 // Pages
-import Material from "./pages/Material";
+import Home from './pages/Home';
+import Material from './pages/Material';
 
 function App() {
   const [provider, setProvider] = useState(null);
@@ -74,19 +75,6 @@ function App() {
 
   );
 }
-
-const Home = ({ setView }) => (
-  <div>
-  <h1>Home Page</h1>
-
-  <nav>
-  <button onClick={() => setView("home")}>Home</button>
-  <button onClick={() => setView("material")}>Material</button>
-  <button onClick={() => setView("fabricate")}>Fabricate</button>
-  <button onClick={() => setView("transport")}>Transport</button>
-  </nav>
-  </div>
-);
 
 const Fabricate = ({ setView }) => <h1>Fabricate page</h1>;
 const Transport = ({ setView }) => <h1>Transport page</h1>
