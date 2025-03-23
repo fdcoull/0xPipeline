@@ -21,6 +21,7 @@ import Navbar from './components/Navbar';
 // Pages
 import Home from './pages/Home';
 import Material from './pages/Material';
+import Fabricate from './pages/Fabricate';
 
 function App() {
   const [provider, setProvider] = useState(null);
@@ -76,7 +77,6 @@ function App() {
   );
 }
 
-const Fabricate = ({ setView }) => <h1>Fabricate page</h1>;
 const Transport = ({ setView }) => <h1>Transport page</h1>
 
 export default App;
