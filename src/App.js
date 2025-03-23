@@ -16,7 +16,7 @@ import Test from './abis/Test.json';
 import config from './config.json';
 
 // Components
-import Navbar from './components/Navbar';
+import Navigation from './components/Navigation';
 
 // Pages
 import Home from './pages/Home';
@@ -66,7 +66,7 @@ function App() {
 
   return (
     <div>
-      <Navbar setView={setView} view={view} />
+      <Navigation setView={setView} view={view} />
 
       {/* View Rendering */}
       {view === "home" && <Home setView={setView} />}
