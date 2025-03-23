@@ -15,6 +15,9 @@ import { Web3Provider } from '@ethersproject/providers';
 import Test from './abis/Test.json';
 import config from './config.json';
 
+// Components
+import Navbar from "./components/Navbar";
+
 function App() {
   const [provider, setProvider] = useState(null);
   const [contract, setContract] = useState(null);
@@ -57,29 +60,7 @@ function App() {
 
   return (
     <div>
-      {/* Navbar only shows when not on home view */}
-      {view !== "home" && (
-        <nav>
-          {view === "material" && (
-            <>
-              <button onClick={() => setView("home")}>Home</button>
-              <button onClick={() => setView("test1")}>Test1</button>
-            </>
-          )}
-          {view === "fabricate" && (
-            <>
-              <button onClick={() => setView("home")}>Home</button>
-              <button onClick={() => setView("test2")}>Test2</button>
-            </>
-          )}
-          {view === "transport" && (
-            <>
-              <button onClick={() => setView("home")}>Home</button>
-              <button onClick={() => setView("test2")}>Test3</button>
-            </>
-          )}
-        </nav>
-      )}
+      <Navbar setView={setView} view={view} />
 
       {/* View Rendering */}
       {view === "home" && <Home setView={setView} />}
