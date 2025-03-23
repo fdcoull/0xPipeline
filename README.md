@@ -1,6 +1,10 @@
 ![alt text](public/logo-full.png)
 
 ## Changelog
+### 0.6.0
+* Remove react default logos
+* Add favico
+
 ### 0.5.0
 * Remove Lock contract
 * Remove Test contract
