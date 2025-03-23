@@ -5,6 +5,7 @@
 * Remove react default logos
 * Added favico
 * React Bootstrap installed
+* Bootstrap navbar added
 
 ### 0.5.0
 * Remove Lock contract
