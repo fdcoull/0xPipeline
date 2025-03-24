@@ -2,10 +2,12 @@
 
 ## Changelog
 ### 0.6.0
+* React Bootstrap installed
+* Bootstrap Icons installed
 * Remove react default logos
 * Added favico
-* React Bootstrap installed
 * Bootstrap navbar added
+* Account page added
 
 ### 0.5.0
 * Remove Lock contract
