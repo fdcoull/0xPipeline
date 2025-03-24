@@ -13,29 +13,27 @@ const Navigation = ({ setView, view }) => {
             <Nav className="me-auto">
               {view === "material" && (
                 <>
-                  <Navbar.Brand onClick={() => setView("home")}><img src="0xP-Fabricate.png" alt="0xPipeline Logo" width="50"/></Navbar.Brand>
+                  <Navbar.Brand onClick={() => setView("fabricate")}><img src="0xp-material.png" alt="0xP Material Logo" width="55"/></Navbar.Brand>
                   
-                  <Nav.Link onClick={() => setView("home")}>Home</Nav.Link>
-                  <Nav.Link onClick={() => setView("home")}>Test1</Nav.Link>
+                  <Nav.Link onClick={() => setView("material")}>Material</Nav.Link>
                 </>
               )}
               {view === "fabricate" && (
                 <>
-                  <Navbar.Brand onClick={() => setView("home")}><img src="logo-full.png" alt="0xPipeline Logo" width="100"/></Navbar.Brand>
-                  <Nav.Link onClick={() => setView("home")}>Home</Nav.Link>
-                  <Nav.Link onClick={() => setView("home")}>Test2</Nav.Link>
+                  <Navbar.Brand onClick={() => setView("fabricate")}><img src="0xp-fabricate.png" alt="0xP Fabricate Logo" width="55"/></Navbar.Brand>
+                  <Nav.Link onClick={() => setView("fabricate")}>Fabricate</Nav.Link>
                 </>
               )}
               {view === "transport" && (
                 <>
-                  <Navbar.Brand onClick={() => setView("home")}><img src="logo-full.png" alt="0xPipeline Logo" width="100"/></Navbar.Brand>
-                  <Nav.Link onClick={() => setView("home")}>Home</Nav.Link>
-                  <Nav.Link onClick={() => setView("home")}>Test3</Nav.Link>
+                  <Navbar.Brand onClick={() => setView("transport")}><img src="0xp-transport.png" alt="0xP Transport Logo" width="55"/></Navbar.Brand>
+                  <Nav.Link onClick={() => setView("transport")}>Transport</Nav.Link>
                 </>
               )}
             </Nav>
             <Nav>
-              <Navbar.Brand onClick={() => setView("home")}><img src="logo-full.png" alt="0xPipeline Logo" width="100"/></Navbar.Brand>
+              <Nav.Link onClick={() => setView("home")}><i className="bi bi-house-fill"></i></Nav.Link>
+              <Nav.Link onClick={() => setView("account")}><i className="bi bi-person-fill"></i></Nav.Link>
             </Nav>
           </Container>
         </Navbar>

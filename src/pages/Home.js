@@ -15,19 +15,19 @@ const Home = ({ setView }) => {
             <Row className="justify-content-center g-3">
                 <Col xs={12} sm={4} className="d-flex justify-content-center mb-4">
                 <Card onClick={() => setView("material")}>
-                    <Card.Img variant="top" src="0xP-Material.png"/>
+                    <Card.Img variant="top" src="0xp-material.png"/>
                     <Card.Body>
                         <Card.Title>Handle raw materials</Card.Title>
                     </Card.Body>
                 </Card>
                 <Card onClick={() => setView("fabricate")}>
-                    <Card.Img variant="top" src="0xP-Fabricate.png"/>
+                    <Card.Img variant="top" src="0xp-fabricate.png"/>
                     <Card.Body>
                         <Card.Title>Build new products</Card.Title>
                     </Card.Body>
                 </Card>
                 <Card onClick={() => setView("transport")}>
-                    <Card.Img variant="top" src="0xP-Transport.png"/>
+                    <Card.Img variant="top" src="0xp-transport.png"/>
                     <Card.Body>
                         <Card.Title>Ship goods</Card.Title>
                     </Card.Body>

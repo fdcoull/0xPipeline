@@ -11,4 +11,9 @@ body {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
   }
+
+  .navbar-brand {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
   
