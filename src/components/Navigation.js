@@ -30,6 +30,11 @@ const Navigation = ({ setView, view }) => {
                   <Nav.Link onClick={() => setView("transport")}>Transport</Nav.Link>
                 </>
               )}
+              {view === "account" && (
+                <>
+                  <Navbar.Brand onClick={() => setView("home")}><img src="0xp-short.png" alt="0xP Short Logo" width="55"/></Navbar.Brand>
+                </>
+              )}
             </Nav>
             <Nav>
               <Nav.Link onClick={() => setView("home")}><i className="bi bi-house-fill"></i></Nav.Link>

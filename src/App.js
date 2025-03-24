@@ -20,6 +20,7 @@ import Navigation from './components/Navigation';
 
 // Pages
 import Home from './pages/Home';
+import Account from './pages/Account';
 import Material from './pages/Material';
 import Fabricate from './pages/Fabricate';
 import Transport from './pages/Transport';
@@ -70,6 +71,7 @@ function App() {
 
       {/* View Rendering */}
       {view === "home" && <Home setView={setView} />}
+      {view === "account" && <Account setView={setView} />}
       {view === "material" && <Material setView={setView} />}
       {view === "fabricate" && <Fabricate setView={setView} />}
       {view === "transport" && <Transport setView={setView} />}
