@@ -1,6 +1,9 @@
 ![alt text](public/logo-full.png)
 
 ## Changelog
+### 0.8.0
+* Removed Lock default ignition file
+
 ### 0.7.0
 * Fixed navbar link
 * Added page menus
