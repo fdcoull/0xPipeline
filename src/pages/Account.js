@@ -5,9 +5,9 @@ import Col from "react-bootstrap/Col";
 
 const Account = ({ setView }) => {
     return (
-        <div>
-        <h1>Account page</h1>
-        </div>
+        <Container fluid>
+            <h2>Account page</h2>
+        </Container>
     );
 }
 

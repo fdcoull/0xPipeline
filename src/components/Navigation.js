@@ -13,7 +13,7 @@ const Navigation = ({ setView, view }) => {
             <Nav className="me-auto">
               {view === "material" && (
                 <>
-                  <Navbar.Brand onClick={() => setView("fabricate")}><img src="0xp-material.png" alt="0xP Material Logo" width="55"/></Navbar.Brand>
+                  <Navbar.Brand onClick={() => setView("material")}><img src="0xp-material.png" alt="0xP Material Logo" width="55"/></Navbar.Brand>
                   
                   <Nav.Link onClick={() => setView("material")}>Material</Nav.Link>
                 </>
