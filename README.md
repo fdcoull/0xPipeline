@@ -4,6 +4,7 @@
 ### 0.7.0
 * Fixed navbar link
 * Added page menus
+* Added toolbar
 
 ### 0.6.0
 * React Bootstrap installed
