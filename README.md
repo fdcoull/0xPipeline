@@ -3,6 +3,7 @@
 ## Changelog
 ### 0.8.0
 * Removed Lock default ignition file
+* Add contract ABIs
 
 ### 0.7.0
 * Fixed navbar link
