@@ -1,6 +1,10 @@
 ![alt text](public/logo-full.png)
 
 ## Changelog
+### 0.7.0
+* Fixed navbar link
+* Added page menus
+
 ### 0.6.0
 * React Bootstrap installed
 * Bootstrap Icons installed

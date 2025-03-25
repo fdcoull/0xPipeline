@@ -17,6 +17,7 @@ import config from './config.json';
 
 // Components
 import Navigation from './components/Navigation';
+import Toolbar from './components/Toolbar';
 
 // Pages
 import Home from './pages/Home';
@@ -70,11 +71,11 @@ function App() {
       <Navigation setView={setView} view={view} />
 
       {/* View Rendering */}
-      {view === "home" && <Home setView={setView} />}
-      {view === "account" && <Account setView={setView} />}
-      {view === "material" && <Material setView={setView} />}
-      {view === "fabricate" && <Fabricate setView={setView} />}
-      {view === "transport" && <Transport setView={setView} />}
+      {view === "home" && <Home setView={setView} view={view}/>}
+      {view === "account" && <Account setView={setView} view={view}/>}
+      {view === "material" && <Material setView={setView} view={view}/>}
+      {view === "fabricate" && <Fabricate setView={setView} view={view}/>}
+      {view === "transport" && <Transport setView={setView} view={view}/>}
     </div>
 
   );
