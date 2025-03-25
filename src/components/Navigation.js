@@ -9,7 +9,7 @@ const Navigation = ({ setView, view }) => {
 
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
-          <Container>
+          <Container fluid>
             <Nav className="me-auto">
               {view === "material" && (
                 <>
