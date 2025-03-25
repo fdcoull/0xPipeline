@@ -2,9 +2,12 @@
 // Learn more about it at https://hardhat.org/ignition
 
 const { buildModule } = require("@nomicfoundation/hardhat-ignition/modules");
+require("dotenv").config();
 
 module.exports = buildModule("MaterialControlModule", (m) => {
-  const materialControl = m.contract("Material", []);
+    const deployerKey = process.env.DEPLOYER_PRIVATE_KEY;
 
-  return { materialControl };
+    const materialControl = m.contract("Material", [deployerKey]);
+    
+    return { materialControl };
 });
