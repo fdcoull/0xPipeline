@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect, useState } from 'react'
 import Toolbar from '../components/Toolbar';
 
 import Container from "react-bootstrap/Container";
@@ -17,7 +18,7 @@ const Transport = ({ setView, view, account, loadBlockchainData, contract }) => 
                 const shipmentCount = await contract.shipmentCount();
     
                 for (let i = 1; i <= shipmentCount; i++) {
-                    const [sender, senderOrderNo, weight, recipient, status, method, cost] = await contract.materials(i);
+                    const [sender, senderOrderNo, weight, recipient, status, method, cost] = await contract.shipments(i);
                     loadedMaterials.push({
                         id: i.toString(),
                         sender: sender,
@@ -30,7 +31,7 @@ const Transport = ({ setView, view, account, loadBlockchainData, contract }) => 
                     });
                 }
     
-                setMaterials(loadedMaterials);
+                setShipments(loadedShipments);
             } catch (error) {
                 console.error("Error loading materials:", error);
             }
@@ -45,6 +46,38 @@ const Transport = ({ setView, view, account, loadBlockchainData, contract }) => 
         <Container fluid>
             <h2>Transport page</h2>
             <Toolbar setView={setView} view={view}/>
+            {shipments.length > 0 ? (
+            <Table striped bordered hover>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Sender</th>
+                        <th>Sender Order No.</th>
+                        <th>Weight</th>
+                        <th>Recipient</th>
+                        <th>Status</th>
+                        <th>Method</th>
+                        <th>Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {shipments.map(shipment => (
+                        <tr key={shipment.id}>
+                            <td>{shipment.id}</td>
+                            <td>{shipment.sender}</td>
+                            <td>{shipment.senderOrderNo}</td>
+                            <td>{shipment.weight}</td>
+                            <td>{shipment.recipient}</td>
+                            <td>{shipment.status}</td>
+                            <td>{shipment.method}</td>
+                            <td>{shipment.cost}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </Table>
+            ) : (
+            <p>Nothing to show.</p>
+            )}
         </Container>
     );
 }

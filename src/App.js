@@ -4,6 +4,7 @@ import { Web3Provider } from '@ethersproject/providers';
 
 // ABIs
 import MaterialControl from './abis/MaterialControl.json';
+import TransportControl from './abis/MaterialControl.json';
 
 // Components
 import Navigation from './components/Navigation';
@@ -44,7 +45,7 @@ function App() {
     setMaterialContract(materialContract);
 
     // Create transport control instance
-    const transportContract = new ethers.Contract(transportContractAddress, FabricateControl, provider);
+    const transportContract = new ethers.Contract(transportContractAddress, TransportControl, provider);
     setTransportContract(transportContract);
   }
 
