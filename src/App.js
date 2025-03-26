@@ -20,7 +20,7 @@ import Transport from './pages/Transport';
 // Environment
 const materialContractAddress = process.env.REACT_APP_MATERIAL_CONTROL_ADDRESS;
 
-const transportContractAddress = process.env.REACT_APP_MATERIAL_CONTROL_ADDRESS;
+const transportContractAddress = process.env.REACT_APP_TRANSPORT_CONTROL_ADDRESS;
 
 function App() {
   const [provider, setProvider] = useState(null);

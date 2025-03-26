@@ -7,19 +7,14 @@ module.exports = buildModule("TransportControlModule", (m) => {
     
     const transportControl = m.contract("TransportControl", []);
 
-    // Add sample data
+    //function ship(uint256 _senderOrderNo, uint256 _weight, address _recipient, Method _method) public payable {
 
-    // const transaction1 = m.call(transportControl, "list", [
-    //     1,
-    //     "Test",
-    //     0,
-    //     "kg",
-    //     5,
-    // ]);
-
-    // const transaction2 = m.call(transportControl, "addBatch", [1, 10], {after: [transaction1]});
-
-    // m.call(transportControl, "buy", [1, 3], {after: [transaction2], value: 15n}); 
+    m.call(transportControl, "ship", [
+        73626,
+        6,
+        "0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199",
+        0,
+    ], {value:1n});
 
     // END
     
