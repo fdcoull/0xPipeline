@@ -11,7 +11,7 @@ const Navigation = ({ setView, view, account }) => {
         <Navbar expand="lg" className="bg-body-tertiary">
           <Container fluid>
             <Nav className="me-auto">
-              {view === "material" && (
+              {view.startsWith("material") && (
                 <>
                   <Navbar.Brand onClick={() => setView("material")}><img src="0xp-material.png" alt="0xP Material Logo" width="55"/></Navbar.Brand>
                   
@@ -19,19 +19,19 @@ const Navigation = ({ setView, view, account }) => {
                   <Nav.Link onClick={() => setView("material.orders")}>Orders</Nav.Link>
                 </>
               )}
-              {view === "fabricate" && (
+              {view.startsWith("fabricate") && (
                 <>
                   <Navbar.Brand onClick={() => setView("fabricate")}><img src="0xp-fabricate.png" alt="0xP Fabricate Logo" width="55"/></Navbar.Brand>
                   <Nav.Link onClick={() => setView("fabricate")}>Fabricate</Nav.Link>
                 </>
               )}
-              {view === "transport" && (
+              {view.startsWith("transport") && (
                 <>
                   <Navbar.Brand onClick={() => setView("transport")}><img src="0xp-transport.png" alt="0xP Transport Logo" width="55"/></Navbar.Brand>
                   <Nav.Link onClick={() => setView("transport")}>Transport</Nav.Link>
                 </>
               )}
-              {view === "account" && (
+              {view.startsWith("account") && (
                 <>
                   <Navbar.Brand onClick={() => setView("home")}><img src="0xp-short.png" alt="0xP Short Logo" width="55"/></Navbar.Brand>
                 </>
