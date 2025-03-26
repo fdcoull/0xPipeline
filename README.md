@@ -5,6 +5,7 @@
 * Removed Lock default ignition file
 * Add contract ABIs
 * Added metamask connection
+* Added login system to accounts page
 
 ### 0.7.0
 * Fixed navbar link

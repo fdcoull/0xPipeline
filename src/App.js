@@ -12,7 +12,6 @@ import { Web3Provider } from '@ethersproject/providers';
 // import config from './config.json'
 
 // Test contract
-import Test from './abis/Test.json';
 import MaterialControl from './abis/MaterialControl.json';
 import config from './config.json';
 
@@ -49,22 +48,6 @@ function App() {
     const contract = new ethers.Contract(contractAddress, MaterialControl, provider);
     setContract(contract);
   }
-
-  // Connect to metamask wallet
-  const connectHandler = async () => {
-    // Get accounts array
-    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-
-    // Get first account in array
-    const account = ethers.getAddress(accounts[0]);
-
-    setAccount(account);
-  }
-
-  // Load blockchain data and hook into component
-  // useEffect(() => {
-  //   loadBlockchainData();
-  // }, []);
 
   const [view, setView] = useState("home");
 
