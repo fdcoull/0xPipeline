@@ -9,16 +9,27 @@ import Button from "react-bootstrap/Button";
 
 
 const Material = ({ setView, view, account, loadBlockchainData, contract }) => {
-    //const [materials, setMaterials] = useState([]);
+    const [materials, setMaterials] = useState([]);
 
-    const materials = []
+    
 
     const loadContractData = async () => {
         if (contract) {
-            for (var i = 0; i < 1; i++) {
-                const material = await contract.materials(i + 1);
-                materials.push(material);
+            const count = await contract.materialCount();
+            const loadedMaterials = []
+
+            for (let i = 1; i <= count; i++) {
+                const material = await contract.materials(i);
+                loadedMaterials.push({
+                    id: material.id.toString(),
+                    name: material.name,
+                    quantity: material.quantity.toString(),
+                    quantity_unit: material.quantity_unit,
+                    cost: material.cost.toString()
+                });
             }
+
+            setMaterials(loadedMaterials);
         }
         
     }
@@ -31,7 +42,11 @@ const Material = ({ setView, view, account, loadBlockchainData, contract }) => {
         <Container fluid>
             <h2>Material page</h2>
             <Toolbar setView={setView} view={view}/>
-            {materials[0].name}
+            {materials.length > 0 ? (
+                <h3>{material.name}</h3>
+            ) : (
+                <p>Loading...</p>
+            )}
         </Container>
     );
 }
