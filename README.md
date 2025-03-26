@@ -1,6 +1,9 @@
 ![alt text](public/logo-full.png)
 
 ## Changelog
+### 0.9.0
+* Add material count to contract
+
 ### 0.8.0
 * Dotenv installed
 * Removed Lock default ignition file
