@@ -37,8 +37,8 @@ const Navigation = ({ setView, view }) => {
               )}
             </Nav>
             <Nav>
-              <Nav.Link onClick={() => setView("home")}><i className="bi bi-house-fill"></i></Nav.Link>
               <Nav.Link onClick={() => setView("account")}><i className="bi bi-person-fill"></i></Nav.Link>
+              <Nav.Link onClick={() => setView("home")}><i className="bi bi-house-fill"></i></Nav.Link>
             </Nav>
           </Container>
         </Navbar>

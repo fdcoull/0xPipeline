@@ -4,6 +4,7 @@
 ### 0.8.0
 * Removed Lock default ignition file
 * Add contract ABIs
+* Added metamask connection
 
 ### 0.7.0
 * Fixed navbar link
