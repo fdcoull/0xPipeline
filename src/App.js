@@ -70,11 +70,11 @@ function App() {
 
   return (
     <div>
-      <Navigation setView={setView} view={view} />
+      <Navigation setView={setView} view={view} account={account} />
 
       {/* View Rendering */}
       {view === "home" && <Home setView={setView} view={view}/>}
-      {view === "account" && <Account setView={setView} view={view}/>}
+      {view === "account" && <Account setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account}/>}
       {view === "material" && <Material setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account}/>}
       {view === "fabricate" && <Fabricate setView={setView} view={view}/>}
       {view === "transport" && <Transport setView={setView} view={view}/>}

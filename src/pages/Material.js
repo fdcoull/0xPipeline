@@ -12,9 +12,6 @@ const Material = ({ setView, view, account, loadBlockchainData }) => {
         <Container fluid>
             <h2>Material page</h2>
             <Toolbar setView={setView} view={view}/>
-            <Button variant="warning" onClick={() => loadBlockchainData()}>Login</Button>
-            <p>Connected account: {account}</p>
-
         </Container>
     );
 }

@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
-const Navigation = ({ setView, view }) => {
+const Navigation = ({ setView, view, account }) => {
     {/* Return null if home page */}
     if (view === "home") return null;
 
@@ -37,6 +37,12 @@ const Navigation = ({ setView, view }) => {
               )}
             </Nav>
             <Nav>
+              <Nav.Link onClick={() => setView("account")}>
+                {account && (
+                  account.slice(0,5) + '...' + account.slice(-5)
+                )} 
+                
+              </Nav.Link>
               <Nav.Link onClick={() => setView("account")}><i className="bi bi-person-fill"></i></Nav.Link>
               <Nav.Link onClick={() => setView("home")}><i className="bi bi-house-fill"></i></Nav.Link>
             </Nav>
