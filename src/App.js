@@ -23,7 +23,7 @@ const contractAddress = process.env.REACT_APP_MATERIAL_CONTROL_ADDRESS;
 
 function App() {
   const [provider, setProvider] = useState(null);
-  const [contract, setContract] = useState(null);
+  const [materialContract, setMaterialContract] = useState(null);
   const [account, setAccount] = useState(null);
   
   const loadBlockchainData = async () => {
@@ -36,9 +36,9 @@ function App() {
     const userAccount = accounts[0];
     setAccount(userAccount);
 
-    // Create contract instance
-    const contract = new ethers.Contract(contractAddress, MaterialControl, provider);
-    setContract(contract);
+    // Create material control instance
+    const materialContract = new ethers.Contract(contractAddress, MaterialControl, provider);
+    setMaterialContract(materialContract);
   }
 
   const [view, setView] = useState("home");
@@ -50,8 +50,8 @@ function App() {
       {/* View Rendering */}
       {view === "home" && <Home setView={setView} view={view}/>}
       {view === "account" && <Account setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account}/>}
-      {view === "material" && <Material setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} contract={contract}/>}
-      {view === "material.orders" && <MaterialOrders setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} contract={contract}/>}
+      {view === "material" && <Material setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} contract={materialContract}/>}
+      {view === "material.orders" && <MaterialOrders setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} contract={materialContract}/>}
       {view === "fabricate" && <Fabricate setView={setView} view={view}/>}
       {view === "transport" && <Transport setView={setView} view={view}/>}
     </div>
