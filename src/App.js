@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react'
 import { ethers } from 'ethers'
 import { Web3Provider } from '@ethersproject/providers';
 
-// Test contract
+// ABIs
 import MaterialControl from './abis/MaterialControl.json';
-import config from './config.json';
 
 // Components
 import Navigation from './components/Navigation';
@@ -19,7 +18,9 @@ import Fabricate from './pages/Fabricate';
 import Transport from './pages/Transport';
 
 // Environment
-const contractAddress = process.env.REACT_APP_MATERIAL_CONTROL_ADDRESS;
+const materialContractAddress = process.env.REACT_APP_MATERIAL_CONTROL_ADDRESS;
+
+const transportContractAddress = process.env.REACT_APP_MATERIAL_CONTROL_ADDRESS;
 
 function App() {
   const [provider, setProvider] = useState(null);
@@ -37,8 +38,12 @@ function App() {
     setAccount(userAccount);
 
     // Create material control instance
-    const materialContract = new ethers.Contract(contractAddress, MaterialControl, provider);
+    const materialContract = new ethers.Contract(materialContractAddress, MaterialControl, provider);
     setMaterialContract(materialContract);
+
+    // Create transport control instance
+    const transportContract = new ethers.Contract(transportContractAddress, FabricateControl, provider);
+    setTransportContract(transportContract);
   }
 
   const [view, setView] = useState("home");
