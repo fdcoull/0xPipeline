@@ -13,6 +13,7 @@ import { Web3Provider } from '@ethersproject/providers';
 
 // Test contract
 import Test from './abis/Test.json';
+import MaterialControl from './abis/MaterialControl.json';
 import config from './config.json';
 
 // Components
@@ -30,22 +31,23 @@ function App() {
   const [provider, setProvider] = useState(null);
   const [contract, setContract] = useState(null);
   const [account, setAccount] = useState(null);
-  const [name, setName] = useState('');
   
   const loadBlockchainData = async () => {
     // Connect to metamask wallet
     const provider = new Web3Provider(window.ethereum);
     setProvider(provider);
 
-    // Get network and set contract
-    const network = await provider.getNetwork();
-    const contractAddress = config[network.chainId].test.address;
-    const contract = new ethers.Contract(contractAddress, Test, provider);
-    setContract(contract);
+    // Request user accounts
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    const userAccount = accounts[0];
+    setAccount(userAccount);
 
-    // Get name variable from contract
-    const name = await contract.name();
-    setName(name);
+    // Change this to get from env
+    const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+
+    // Create contract instance
+    const contract = new ethers.Contract(contractAddress, MaterialControl, provider);
+    setContract(contract);
   }
 
   // Connect to metamask wallet
@@ -60,9 +62,9 @@ function App() {
   }
 
   // Load blockchain data and hook into component
-  useEffect(() => {
-    loadBlockchainData();
-  }, []);
+  // useEffect(() => {
+  //   loadBlockchainData();
+  // }, []);
 
   const [view, setView] = useState("home");
 
@@ -73,7 +75,7 @@ function App() {
       {/* View Rendering */}
       {view === "home" && <Home setView={setView} view={view}/>}
       {view === "account" && <Account setView={setView} view={view}/>}
-      {view === "material" && <Material setView={setView} view={view}/>}
+      {view === "material" && <Material setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account}/>}
       {view === "fabricate" && <Fabricate setView={setView} view={view}/>}
       {view === "transport" && <Transport setView={setView} view={view}/>}
     </div>

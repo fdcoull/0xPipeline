@@ -7,7 +7,21 @@ require("dotenv").config();
 module.exports = buildModule("MaterialControlModule", (m) => {
     const deployerKey = process.env.DEPLOYER_PRIVATE_KEY;
 
-    const materialControl = m.contract("Material", [deployerKey]);
+    const materialControl = m.contract("MaterialControl", []);
+
+    // Add sample data
+
+    m.call(materialControl, "list", [
+        1,
+        "Test",
+        0,
+        "kg",
+        5,
+    ]);
+
+    m.call(materialControl, "addBatch", [1, 10]);
+
+    // END
     
     return { materialControl };
 });
