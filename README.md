@@ -3,6 +3,9 @@
 ## Changelog
 ### 0.9.0
 * Add material count to contract
+* Add contract read functionality
+* Add material view
+* Add material orders view
 
 ### 0.8.0
 * Dotenv installed
