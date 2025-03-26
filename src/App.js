@@ -25,6 +25,8 @@ const transportContractAddress = process.env.REACT_APP_TRANSPORT_CONTROL_ADDRESS
 function App() {
   const [provider, setProvider] = useState(null);
   const [materialContract, setMaterialContract] = useState(null);
+
+  const [transportContract, setTransportContract] = useState(null);
   const [account, setAccount] = useState(null);
   
   const loadBlockchainData = async () => {
@@ -58,7 +60,7 @@ function App() {
       {view === "material" && <Material setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} contract={materialContract}/>}
       {view === "material.orders" && <MaterialOrders setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} contract={materialContract}/>}
       {view === "fabricate" && <Fabricate setView={setView} view={view}/>}
-      {view === "transport" && <Transport setView={setView} view={view}/>}
+      {view === "transport" && <Transport setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} contract={transportContract}/>}
     </div>
 
   );

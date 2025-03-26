@@ -1,11 +1,15 @@
 ![alt text](public/logo-full.png)
 
 ## Changelog
+### 0.10.0
+* Added transport deploy script
+
 ### 0.9.0
-* Add material count to contract
-* Add contract read functionality
-* Add material view
-* Add material orders view
+* Added material count to contract
+* Added material deploy script
+* Added contract read functionality
+* Added material view
+* Added material orders view
 
 ### 0.8.0
 * Dotenv installed
