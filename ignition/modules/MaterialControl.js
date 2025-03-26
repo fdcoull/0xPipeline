@@ -9,7 +9,7 @@ module.exports = buildModule("MaterialControlModule", (m) => {
 
     // Add sample data
 
-    m.call(materialControl, "list", [
+    const transaction1 = m.call(materialControl, "list", [
         1,
         "Test",
         0,
@@ -17,7 +17,7 @@ module.exports = buildModule("MaterialControlModule", (m) => {
         5,
     ]);
 
-    m.call(materialControl, "addBatch", [1, 10]);
+    m.call(materialControl, "addBatch", [1, 10], {after: [transaction1]});
 
     // END
     
