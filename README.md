@@ -2,10 +2,12 @@
 
 ## Changelog
 ### 0.8.0
+* Dotenv installed
 * Removed Lock default ignition file
 * Add contract ABIs
 * Added metamask connection
 * Added login system to accounts page
+* Add env reference for Material Control Address
 
 ### 0.7.0
 * Fixed navbar link
