@@ -5,6 +5,7 @@ const { buildModule } = require("@nomicfoundation/hardhat-ignition/modules");
 require("dotenv").config();
 
 module.exports = buildModule("MaterialControlModule", (m) => {
+    
     const materialControl = m.contract("MaterialControl", []);
 
     // Add sample data
