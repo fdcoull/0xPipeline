@@ -4,6 +4,7 @@ pragma solidity ^0.8.28;
 contract MaterialControl {
     address public owner;
     uint256 public orderCount;
+    uint256 public materialCount;
 
     // Structs
     struct Material {
@@ -28,6 +29,8 @@ contract MaterialControl {
         // Set owner to deployer address
         owner = msg.sender;
         orderCount = 0;
+        materialCount = 0;
+
     }
 
     // Modifiers
@@ -45,8 +48,13 @@ contract MaterialControl {
         string memory _quantity_unit,
         uint256 _cost
     ) public onlyOwner {
+        // Create material type with parameters
         Material memory material = Material(_name, _quantity, _quantity_unit, _cost);
 
+        // Increase material count
+        materialCount++;
+
+        // Save to materials mapping at _id parameter
         materials[_id] = material;
     }
 
@@ -60,6 +68,7 @@ contract MaterialControl {
     }
 
     function buy(uint256 _id, uint256 _quantity) public payable {
+        // Get material with parameter _id
         Material memory material = materials[_id];
 
         // Require payment to be over or qual to material cost * quantity ordering
@@ -68,11 +77,11 @@ contract MaterialControl {
         // Require material quantity to be enough for purchase
         require(material.quantity >= _quantity);
 
-        // Create order
-        Order memory order = Order(block.timestamp, _id, _quantity, msg.sender);
-
         // Increase orderCount
         orderCount++;
+
+        // Create order
+        Order memory order = Order(block.timestamp, _id, _quantity, msg.sender);
 
         // Subtract stock
         materials[_id].quantity = materials[_id].quantity - _quantity;
@@ -80,5 +89,4 @@ contract MaterialControl {
         // Set orders mapping
         orders[orderCount] = order;
     }
-
 }
