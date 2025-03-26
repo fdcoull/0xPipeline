@@ -18,7 +18,9 @@ module.exports = buildModule("MaterialControlModule", (m) => {
         5,
     ]);
 
-    m.call(materialControl, "addBatch", [1, 10], {after: [transaction1]});
+    const transaction2 = m.call(materialControl, "addBatch", [1, 10], {after: [transaction1]});
+
+    m.call(materialControl, "buy", [1, 3], {after: [transaction2], value: 15n}); 
 
     // END
     
