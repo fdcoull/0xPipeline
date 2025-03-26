@@ -23,6 +23,7 @@ import Toolbar from './components/Toolbar';
 import Home from './pages/Home';
 import Account from './pages/Account';
 import Material from './pages/Material';
+import MaterialOrders from './pages/MaterialOrders';
 import Fabricate from './pages/Fabricate';
 import Transport from './pages/Transport';
 
@@ -59,6 +60,7 @@ function App() {
       {view === "home" && <Home setView={setView} view={view}/>}
       {view === "account" && <Account setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account}/>}
       {view === "material" && <Material setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} contract={contract}/>}
+      {view === "material.orders" && <MaterialOrders setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} contract={contract}/>}
       {view === "fabricate" && <Fabricate setView={setView} view={view}/>}
       {view === "transport" && <Transport setView={setView} view={view}/>}
     </div>
