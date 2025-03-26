@@ -50,7 +50,32 @@ const Material = ({ setView, view, account, loadBlockchainData, contract }) => {
         <Container fluid>
             <h2>Material page</h2>
             <Toolbar setView={setView} view={view}/>
-            
+            {materials.length > 0 ? (
+            <Table striped bordered hover>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>QTY</th>
+                        <th>QTY Unit</th>
+                        <th>Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {materials.map(material => (
+                        <tr key={material.id}>
+                            <td>{material.id}</td>
+                            <td>{material.name}</td>
+                            <td>{material.quantity}</td>
+                            <td>{material.quantity_unit}</td>
+                            <td>{material.cost}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </Table>
+            ) : (
+            <p>Nothing to show.</p>
+            )}
         </Container>
     );
 }
