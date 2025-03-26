@@ -2,15 +2,6 @@ import { useEffect, useState } from 'react'
 import { ethers } from 'ethers'
 import { Web3Provider } from '@ethersproject/providers';
 
-// Components - For page sections
-// import Navigation from './components/Navigation'
-
-// ABIs
-// import Pipeline from './abis/Pipeline.json'
-
-// Config
-// import config from './config.json'
-
 // Test contract
 import MaterialControl from './abis/MaterialControl.json';
 import config from './config.json';
