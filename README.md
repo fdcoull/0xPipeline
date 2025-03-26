@@ -3,6 +3,8 @@
 ## Changelog
 ### 0.10.0
 * Added transport deploy script
+* Fixed transport contract issue
+* Added transport view
 
 ### 0.9.0
 * Added material count to contract

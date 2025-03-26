@@ -4,7 +4,7 @@ import { Web3Provider } from '@ethersproject/providers';
 
 // ABIs
 import MaterialControl from './abis/MaterialControl.json';
-import TransportControl from './abis/MaterialControl.json';
+import TransportControl from './abis/TransportControl.json';
 
 // Components
 import Navigation from './components/Navigation';

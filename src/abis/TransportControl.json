@@ -1,134 +1,147 @@
 [
-    {
-      "inputs": [],
-      "stateMutability": "nonpayable",
-      "type": "constructor"
-    },
-    {
-      "inputs": [],
-      "name": "owner",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "name": "prices",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_senderOrderNo",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_weight",
-          "type": "uint256"
-        },
-        {
-          "internalType": "address",
-          "name": "_recipient",
-          "type": "address"
-        },
-        {
-          "internalType": "enum TransportControl.Method",
-          "name": "_method",
-          "type": "uint8"
-        }
-      ],
-      "name": "ship",
-      "outputs": [],
-      "stateMutability": "payable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "name": "shipments",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "sender",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "senderOrderNo",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "weight",
-          "type": "uint256"
-        },
-        {
-          "internalType": "address",
-          "name": "recipient",
-          "type": "address"
-        },
-        {
-          "internalType": "enum TransportControl.Status",
-          "name": "status",
-          "type": "uint8"
-        },
-        {
-          "internalType": "enum TransportControl.Method",
-          "name": "method",
-          "type": "uint8"
-        },
-        {
-          "internalType": "uint256",
-          "name": "cost",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_orderNo",
-          "type": "uint256"
-        },
-        {
-          "internalType": "enum TransportControl.Status",
-          "name": "_status",
-          "type": "uint8"
-        }
-      ],
-      "name": "updateStatus",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    }
-  ]
+  {
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "prices",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_senderOrderNo",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_weight",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "_recipient",
+        "type": "address"
+      },
+      {
+        "internalType": "enum TransportControl.Method",
+        "name": "_method",
+        "type": "uint8"
+      }
+    ],
+    "name": "ship",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "shipmentCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "shipments",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "senderOrderNo",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "weight",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "recipient",
+        "type": "address"
+      },
+      {
+        "internalType": "enum TransportControl.Status",
+        "name": "status",
+        "type": "uint8"
+      },
+      {
+        "internalType": "enum TransportControl.Method",
+        "name": "method",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "cost",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_orderNo",
+        "type": "uint256"
+      },
+      {
+        "internalType": "enum TransportControl.Status",
+        "name": "_status",
+        "type": "uint8"
+      }
+    ],
+    "name": "updateStatus",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

@@ -3,7 +3,7 @@ pragma solidity ^0.8.28;
 
 contract TransportControl {
     address public owner;
-    uint256 shipmentCount;
+    uint256 public shipmentCount;
     uint256[4] public prices;
 
     // Enums

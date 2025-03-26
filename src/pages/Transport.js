@@ -19,7 +19,7 @@ const Transport = ({ setView, view, account, loadBlockchainData, contract }) => 
     
                 for (let i = 1; i <= shipmentCount; i++) {
                     const [sender, senderOrderNo, weight, recipient, status, method, cost] = await contract.shipments(i);
-                    loadedMaterials.push({
+                    loadedShipments.push({
                         id: i.toString(),
                         sender: sender,
                         senderOrderNo: senderOrderNo,
@@ -73,6 +73,7 @@ const Transport = ({ setView, view, account, loadBlockchainData, contract }) => 
                             <td>{shipment.cost}</td>
                         </tr>
                     ))}
+                    {console.log(shipments)}
                 </tbody>
             </Table>
             ) : (
