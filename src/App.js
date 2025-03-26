@@ -26,6 +26,9 @@ import Material from './pages/Material';
 import Fabricate from './pages/Fabricate';
 import Transport from './pages/Transport';
 
+// Environment
+const contractAddress = process.env.REACT_APP_MATERIAL_CONTROL_ADDRESS;
+
 function App() {
   const [provider, setProvider] = useState(null);
   const [contract, setContract] = useState(null);
@@ -40,9 +43,6 @@ function App() {
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     const userAccount = accounts[0];
     setAccount(userAccount);
-
-    // Change this to get from env
-    const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 
     // Create contract instance
     const contract = new ethers.Contract(contractAddress, MaterialControl, provider);
