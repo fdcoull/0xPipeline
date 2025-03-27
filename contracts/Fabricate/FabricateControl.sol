@@ -3,7 +3,9 @@ pragma solidity ^0.8.0;
 
 contract FabricateControl {
     address public owner;
+    uint256 public partCount;
     uint256 public orderCount;
+    uint256 public productCount;
 
     // Structs
     // Individual part
@@ -64,7 +66,6 @@ contract FabricateControl {
 
     // Add new part
     function addNewPart(
-        uint256 _id, 
         string memory _name,
         uint256 _quantity,
         string memory _quantity_unit,
@@ -72,18 +73,21 @@ contract FabricateControl {
     ) public onlyOwner {
         Part memory part = Part(_name, _quantity, _quantity_unit, _cost);
 
-        parts[_id] = part;
+        partCount++;
+        parts[partCount] = part;
     }
 
     // Add new BOM
-    function addNewBomProduct(uint256 _id, Component[] memory _parts, string memory _name, string memory _quantity_unit, uint256 _cost) public onlyOwner {
+    function addNewBomProduct(Component[] memory _parts, string memory _name, string memory _quantity_unit, uint256 _cost) public onlyOwner {
+        productCount++;
+        
         for (uint256 i = 0; i < _parts.length; i++) {
-            boms[_id].push(Component({
+            boms[productCount].push(Component({
                 partId: _parts[i].partId,
                 quantity: _parts[i].quantity
             }));
         }
-        products[_id] = Product(_name, 0, _quantity_unit, _cost);
+        products[productCount] = Product(_name, 0, _quantity_unit, _cost);
     }
 
     // Get BOM by ID

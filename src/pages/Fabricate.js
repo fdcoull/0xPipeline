@@ -8,17 +8,15 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
 
-const Fabricate = ({ setView, view }) => {
+const Fabricate = ({ setView, view, account, loadBlockchainData, contract }) => {
     const [parts, setParts] = useState([]);
     
         const loadContractData = async () => {
             if (contract) {
                 try {
-                    //const count = await contract.materialCount();
-                    //console.log("Material count:", count.toString());
-                    const loadedMaterials = [];
+                    const loadedParts = [];
                     
-                    const materialCount = await contract.materialCount();
+                    const partCount = await contract.materialCount();
         
                     for (let i = 1; i <= materialCount; i++) {
                         //const material = await contract.materials(i);
