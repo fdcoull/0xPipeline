@@ -1,6 +1,9 @@
 ![alt text](public/logo-full.png)
 
 ## Changelog
+### 0.11.0
+
+
 ### 0.10.0
 * Added transport deploy script
 * Fixed transport contract issue
