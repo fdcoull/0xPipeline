@@ -4,6 +4,7 @@ import { Web3Provider } from '@ethersproject/providers';
 
 // ABIs
 import MaterialControl from './abis/MaterialControl.json';
+import FabricateControl from './abis/FabricateControl.json';
 import TransportControl from './abis/TransportControl.json';
 
 // Components
@@ -20,13 +21,13 @@ import Transport from './pages/Transport';
 
 // Environment
 const materialContractAddress = process.env.REACT_APP_MATERIAL_CONTROL_ADDRESS;
-
+const fabricateContractAddress = process.env.REACT_APP_FABRICATE_CONTROL_ADDRESS;
 const transportContractAddress = process.env.REACT_APP_TRANSPORT_CONTROL_ADDRESS;
 
 function App() {
   const [provider, setProvider] = useState(null);
   const [materialContract, setMaterialContract] = useState(null);
-
+  const [fabricateContract, setFabricateContract] = useState(null);
   const [transportContract, setTransportContract] = useState(null);
   const [account, setAccount] = useState(null);
   
@@ -44,6 +45,10 @@ function App() {
     const materialContract = new ethers.Contract(materialContractAddress, MaterialControl, provider);
     setMaterialContract(materialContract);
 
+    // Create fabricate control instance
+    const fabricateContract = new ethers.Contract(fabricateContractAddress, FabricateControl, provider);
+    setFabricateContract(fabricateContract);
+
     // Create transport control instance
     const transportContract = new ethers.Contract(transportContractAddress, TransportControl, provider);
     setTransportContract(transportContract);
@@ -60,7 +65,7 @@ function App() {
       {view === "account" && <Account setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account}/>}
       {view === "material" && <Material setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} contract={materialContract}/>}
       {view === "material.orders" && <MaterialOrders setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} contract={materialContract}/>}
-      {view === "fabricate" && <Fabricate setView={setView} view={view}/>}
+      {view === "fabricate" && <Fabricate setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} contract={fabricateContract}/>}
       {view === "transport" && <Transport setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} contract={transportContract}/>}
     </div>
 

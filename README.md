@@ -2,7 +2,8 @@
 
 ## Changelog
 ### 0.11.0
-
+* Added fabricate deploy script
+* Fixed fabricate contract issue
 
 ### 0.10.0
 * Added transport deploy script
