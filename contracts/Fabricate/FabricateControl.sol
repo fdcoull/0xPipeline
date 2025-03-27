@@ -113,10 +113,10 @@ contract FabricateControl {
         Product memory product = products[_id];
 
         // Require payment to be over or qual to material cost * quantity ordering
-        require(msg.value >= product.cost * _quantity);
+        require(msg.value >= product.cost * _quantity, "Insufficient funds");
 
         // Require material quantity to be enough for purchase
-        require(product.quantity >= _quantity);
+        require(product.quantity >= _quantity, "Insufficient stock");
 
         // Create order
         Order memory order = Order(block.timestamp, _id, _quantity, msg.sender);

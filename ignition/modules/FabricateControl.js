@@ -15,16 +15,16 @@ module.exports = buildModule("FabricateControlModule", (m) => {
         "Test Plate",
         100,
         "units",
-        10
-    ]);
+        2
+    ], {id: "addPart_TestPlate"});
 
     transaction2 = m.call(fabricateControl, "addNewPart", [
         2,
         "Test Shaft",
         200,
         "units",
-        30
-    ], {after: [transaction1]});
+        3
+    ], {after: [transaction1], id: "addPart_TestShaft"});
 
     const components = [
         {
@@ -42,18 +42,18 @@ module.exports = buildModule("FabricateControlModule", (m) => {
         components,
         "Test Assembled Product",
         "units",
-        50
+        8
     ], {after: [transaction2]});
 
     transaction4 = m.call(fabricateControl, "manufactureProduct", [
         1,
-        10
+        5
     ], {after: [transaction3]});
 
-    transaction5 = m.call(transportControl, "buy", [
+    transaction5 = m.call(fabricateControl, "buy", [
         1,
         2,
-    ], {value:100n});
+    ], {value:16n, after: [transaction4]});
 
 
     // END
