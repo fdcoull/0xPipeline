@@ -11,7 +11,6 @@ module.exports = buildModule("FabricateControlModule", (m) => {
     // Add sample data
 
     transaction1 = m.call(fabricateControl, "addNewPart", [
-        1,
         "Test Plate",
         100,
         "units",
@@ -19,7 +18,6 @@ module.exports = buildModule("FabricateControlModule", (m) => {
     ], {id: "addPart_TestPlate"});
 
     transaction2 = m.call(fabricateControl, "addNewPart", [
-        2,
         "Test Shaft",
         200,
         "units",
@@ -38,7 +36,6 @@ module.exports = buildModule("FabricateControlModule", (m) => {
       ];
 
     transaction3 = m.call(fabricateControl, "addNewBomProduct", [
-        1,
         components,
         "Test Assembled Product",
         "units",
