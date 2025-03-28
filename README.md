@@ -4,6 +4,8 @@
 ### 0.11.0
 * Added fabricate deploy script
 * Fixed fabricate contract issue
+* Added fabricate parts view
+* Added fabricate products view
 
 ### 0.10.0
 * Added transport deploy script
