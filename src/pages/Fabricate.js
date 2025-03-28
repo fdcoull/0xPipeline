@@ -16,12 +16,11 @@ const Fabricate = ({ setView, view, account, loadBlockchainData, contract }) => 
                 try {
                     const loadedParts = [];
                     
-                    const partCount = await contract.materialCount();
+                    const partCount = await contract.partCount();
         
-                    for (let i = 1; i <= materialCount; i++) {
-                        //const material = await contract.materials(i);
-                        const [name, quantity, quantity_unit, cost] = await contract.materials(i);
-                        loadedMaterials.push({
+                    for (let i = 1; i <= partCount; i++) {
+                        const [name, quantity, quantity_unit, cost] = await contract.parts(i);
+                        loadedParts.push({
                             id: i.toString(),
                             name: name,
                             quantity: quantity.toString(),
@@ -30,13 +29,11 @@ const Fabricate = ({ setView, view, account, loadBlockchainData, contract }) => 
                         });
                     }
         
-                    setMaterials(loadedMaterials);
+                    setParts(loadedParts);
                 } catch (error) {
-                    console.error("Error loading materials:", error);
+                    console.error("Error loading parts:", error);
                 }
-                
             }
-            
         }
     
         useEffect(() => {
@@ -46,6 +43,32 @@ const Fabricate = ({ setView, view, account, loadBlockchainData, contract }) => 
         <Container fluid>
             <h2>Parts</h2>
             <Toolbar setView={setView} view={view}/>
+            {parts.length > 0 ? (
+            <Table striped bordered hover>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>QTY</th>
+                        <th>QTY Unit</th>
+                        <th>Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {parts.map(part => (
+                        <tr key={part.id}>
+                            <td>{part.id}</td>
+                            <td>{part.name}</td>
+                            <td>{part.quantity}</td>
+                            <td>{part.quantity_unit}</td>
+                            <td>{part.cost}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </Table>
+            ) : (
+            <p>Nothing to show.</p>
+            )}
         </Container>
     );
 }
