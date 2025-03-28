@@ -24,6 +24,7 @@ const Navigation = ({ setView, view, account }) => {
                   <Navbar.Brand onClick={() => setView("fabricate")}><img src="0xp-fabricate.png" alt="0xP Fabricate Logo" width="55"/></Navbar.Brand>
                   <Nav.Link onClick={() => setView("fabricate")}>Parts</Nav.Link>
                   <Nav.Link onClick={() => setView("fabricate.products")}>Products</Nav.Link>
+                  <Nav.Link onClick={() => setView("fabricate.orders")}>Orders</Nav.Link>
                 </>
               )}
               {view.startsWith("transport") && (

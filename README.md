@@ -6,6 +6,7 @@
 * Fixed fabricate contract issue
 * Added fabricate parts view
 * Added fabricate products view
+* Added fabricate orders view
 
 ### 0.10.0
 * Added transport deploy script

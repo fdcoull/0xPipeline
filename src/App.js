@@ -18,6 +18,7 @@ import Material from './pages/Material';
 import MaterialOrders from './pages/MaterialOrders';
 import Fabricate from './pages/Fabricate';
 import FabricateProducts from './pages/FabricateProducts';
+import FabricateOrders from './pages/FabricateOrders';
 import Transport from './pages/Transport';
 
 // Environment
@@ -68,6 +69,7 @@ function App() {
       {view === "material.orders" && <MaterialOrders setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} contract={materialContract}/>}
       {view === "fabricate" && <Fabricate setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} contract={fabricateContract}/>}
       {view === "fabricate.products" && <FabricateProducts setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} contract={fabricateContract}/>}
+      {view === "fabricate.orders" && <FabricateOrders setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} contract={fabricateContract}/>}
       {view === "transport" && <Transport setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} contract={transportContract}/>}
     </div>
 
