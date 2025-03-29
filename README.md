@@ -1,5 +1,8 @@
 ![alt text](public/logo-full.png)
 
+## Installation
+
+
 ## Changelog
 ### 0.12.0
 * Added hamburger indicator
