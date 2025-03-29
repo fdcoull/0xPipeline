@@ -7,6 +7,7 @@
 * Added fabricate parts view
 * Added fabricate products view
 * Added fabricate orders view
+* Added fabricate boms view
 
 ### 0.10.0
 * Added transport deploy script
