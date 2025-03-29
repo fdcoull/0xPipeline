@@ -6,9 +6,9 @@ A blockchain based supply chain management system built with Solidity and React.
 
 <table align="center" style="border: none; width: 100%;">
     <tr>
-        <td style="width:33%; padding: 8%;"><img src="public/0xp-material-white.png" alt="0xP Material Logo"></td>
-        <td style="width:33%; padding: 8%;"><img src="public/0xp-fabricate-white.png" alt="0xP Fabricate Logo"></td>
-        <td style="width:33%; padding: 8%;"><img src="public/0xp-transport-white.png" alt="0xP Transport Logo"></td>
+        <td style="width:33%; padding: 8%; border: none;"><img src="public/0xp-material-white.png" alt="0xP Material Logo"></td>
+        <td style="width:33%; padding: 8%; border: none;"><img src="public/0xp-fabricate-white.png" alt="0xP Fabricate Logo"></td>
+        <td style="width:33%; padding: 8%; border: none;"><img src="public/0xp-transport-white.png" alt="0xP Transport Logo"></td>
     </tr>
 </table>
 
