@@ -134,4 +134,8 @@ contract FabricateControl {
         // Set orders mapping
         orders[orderCount] = order;
     }
+
+    function getComponentCount(uint256 bomId) public view returns (uint256) {
+        return boms[bomId].length;
+    }
 }
