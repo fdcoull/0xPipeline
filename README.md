@@ -1,6 +1,9 @@
 ![alt text](public/logo-full.png)
 
 ## Changelog
+### 0.12.0
+* Added hamburger indicator
+
 ### 0.11.0
 * Added fabricate deploy script
 * Fixed fabricate contract issue

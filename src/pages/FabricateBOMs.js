@@ -78,6 +78,7 @@ const FabricateBOMs = ({ setView, view, account, loadBlockchainData, contract })
                             <td>{bom.id}</td>
                             <td>{bom.name}</td>
                             <td>{bom.componentCount}</td>
+                            <td><i className="bi bi-list"></i></td>
                         </tr>
                         {expandedBoms[bom.id] && (
                         <tr key={`components-${bom.id}`}>
