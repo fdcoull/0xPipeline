@@ -10,6 +10,7 @@ import Table from "react-bootstrap/Table";
 
 const FabricateBOMs = ({ setView, view, account, loadBlockchainData, contract }) => {
     const [boms, setBoms] = useState([]);
+    const [expandedBoms, setExpandedBoms] = useState({});
     
         const loadContractData = async () => {
             if (contract) {
@@ -19,19 +20,29 @@ const FabricateBOMs = ({ setView, view, account, loadBlockchainData, contract })
                     const bomCount = await contract.productCount();
         
                     for (let i = 1; i <= bomCount; i++) {
-                        const [name, quantity, quantity_unit, cost] = await contract.products(i);
-                        loadedProducts.push({
+                        const [name] = await contract.products(i);
+                        const componentCount = await contract.getComponentCount(i);
+                        const components = [];
+
+                        for (let j = 0; j < componentCount; j++) {
+                            const component = await contract.boms(i, j);
+                            components.push({
+                                partId: component.partId,
+                                quantity: component.quantity
+                            });
+                        }
+
+                        loadedBoms.push({
                             id: i.toString(),
                             name: name,
-                            quantity: quantity.toString(),
-                            quantity_unit: quantity_unit,
-                            cost: cost.toString()
+                            components: components,
+                            componentCount: componentCount
                         });
                     }
         
-                    setProducts(loadedProducts);
+                    setBoms(loadedBoms);
                 } catch (error) {
-                    console.error("Error loading products:", error);
+                    console.error("Error loading boms:", error);
                 }
             }
         }
@@ -39,30 +50,52 @@ const FabricateBOMs = ({ setView, view, account, loadBlockchainData, contract })
         useEffect(() => {
             loadContractData();
         }, [contract]);
+
+        const toggleBom = (bomId) => {
+            setExpandedBoms(prev => ({
+              ...prev,
+              [bomId]: !prev[bomId]
+            }));
+        };
+
     return (
         <Container fluid>
-            <h2>Products</h2>
+            <h2>BOMs</h2>
             <Toolbar setView={setView} view={view}/>
-            {products.length > 0 ? (
+            {boms.length > 0 ? (
             <Table striped bordered hover>
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>QTY</th>
-                        <th>QTY Unit</th>
-                        <th>Cost</th>
+                        <th>Component Count</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {products.map(product => (
-                        <tr key={product.id}>
-                            <td>{product.id}</td>
-                            <td>{product.name}</td>
-                            <td>{product.quantity}</td>
-                            <td>{product.quantity_unit}</td>
-                            <td>{product.cost}</td>
+                    {boms.map(bom => (
+                        <>
+                        <tr key={bom.id} onClick={() => toggleBom(bom.id)} style={{ cursor: 'pointer' }}>
+                            <td>{bom.id}</td>
+                            <td>{bom.name}</td>
+                            <td>{bom.componentCount}</td>
                         </tr>
+                        {expandedBoms[bom.id] && (
+                        <tr key={`components-${bom.id}`}>
+                        <td colSpan="3">
+                            <div style={{ padding: '10px 20px' }}>
+                            <h4>Components:</h4>
+                            <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
+                                {bom.components.map((comp, i) => (
+                                <li key={i}>
+                                    Part {comp.partId} - Quantity: {comp.quantity}
+                                </li>
+                                ))}
+                            </ul>
+                            </div>
+                        </td>
+                        </tr>
+                        )}
+                        </>
                     ))}
                 </tbody>
             </Table>

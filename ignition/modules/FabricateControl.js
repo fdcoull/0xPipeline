@@ -35,12 +35,30 @@ module.exports = buildModule("FabricateControlModule", (m) => {
         }
       ];
 
+      const components2 = [
+        {
+          partId: 1,
+          quantity: 4
+        },
+        {
+          partId: 2,
+          quantity: 7
+        }
+      ];
+
     transaction3 = m.call(fabricateControl, "addNewBomProduct", [
+        components2,
+        "Test Assembled Product",
+        "units",
+        8
+    ], {after: [transaction2], id: "addBom_1"});
+
+    transaction3_1 = m.call(fabricateControl, "addNewBomProduct", [
         components,
         "Test Assembled Product",
         "units",
         8
-    ], {after: [transaction2]});
+    ], {after: [transaction2], id: "addBom_2"});
 
     transaction4 = m.call(fabricateControl, "manufactureProduct", [
         1,
