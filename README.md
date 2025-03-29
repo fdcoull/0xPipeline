@@ -1,4 +1,4 @@
-<div style="display: flex; justify-content: center;">
+<div align="center">
 <img src="public/logo-full.png" alt="0xPipeline Logo" style="width:50%;">
 </div>
 
