@@ -6,13 +6,48 @@ A blockchain based supply chain management system built with Solidity and React.
 
 <table align="center" style="border: none; width: 100%;">
     <tr>
-        <td style="width:33%; padding: 8%; border: none;"><img src="public/0xp-material-white.png" alt="0xP Material Logo"></td>
-        <td style="width:33%; padding: 8%; border: none;"><img src="public/0xp-fabricate-white.png" alt="0xP Fabricate Logo"></td>
-        <td style="width:33%; padding: 8%; border: none;"><img src="public/0xp-transport-white.png" alt="0xP Transport Logo"></td>
+        <td style="width:33%; padding: 8%;"><img src="public/0xp-material-white.png" alt="0xP Material Logo"></td>
+        <td style="width:33%; padding: 8%;"><img src="public/0xp-fabricate-white.png" alt="0xP Fabricate Logo"></td>
+        <td style="width:33%; padding: 8%;"><img src="public/0xp-transport-white.png" alt="0xP Transport Logo"></td>
     </tr>
 </table>
 
-## Installation
+## Prerequisites
+* Node.js installed
+* NPM (Node Package Manager) installed
+* Metamask
+
+## Setup
+### Installation
+* Run `git clone -b release https://github.com/fdcoull/0xPipeline.git`
+* Run `npm install`
+* In the root directory, create an .env file.
+* Run `npx hardhat compile`
+
+### Virtual Blockchain
+* Run `npx hardhat node`, keep this running as it is required for deploying contracts and accessing them.
+
+### Deploy Contracts
+* Run `npx hardhat ignition deploy ignition/modules/MaterialControl.js --network localhost`
+* Run `npx hardhat ignition deploy ignition/modules/FabricateControl.js --network localhost`
+* Run `npx hardhat ignition deploy ignition/modules/TransportControl.js --network localhost`
+
+### React Frontend
+* Run `npm run start`, keep this running as it is required for viewing the web app.
+* Follow the url returned by this command on your browser.
+
+## Instructions
+### General
+* Following the link provided by `npm run start` will take you to the home page.
+* From here, select either Material, Fabricate, or Transport depending on your requirements.
+* Initially you will need to login by clicking the user icon at the top right.
+* Click on login, login to metamask, and you will see your public address show at the bottom of the page as well as on the navbar next to the user icon.
+
+### Material
+
+### Fabricate
+
+### Transport
 
 ## Changelog
 ### 0.12.0
