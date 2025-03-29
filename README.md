@@ -25,15 +25,23 @@ A blockchain based supply chain management system built with Solidity and React.
 * Run `npx hardhat compile`
 
 ### Virtual Blockchain
-* Run `npx hardhat node`, keep this running as it is required for deploying contracts and accessing them.
+* Run `npx hardhat node`
+* Keep this running as it is required for deploying contracts and accessing them.
 
 ### Deploy Contracts
 * Run `npx hardhat ignition deploy ignition/modules/MaterialControl.js --network localhost`
 * Run `npx hardhat ignition deploy ignition/modules/FabricateControl.js --network localhost`
 * Run `npx hardhat ignition deploy ignition/modules/TransportControl.js --network localhost`
+* Copy each of the deployed addresses from the output into the .env file, using the following format:
+
+`REACT_APP_MATERIAL_CONTROL_ADDRESS=`  
+`REACT_APP_FABRICATE_CONTROL_ADDRESS=`  
+`REACT_APP_TRANSPORT_CONTROL_ADDRESS=`  
+
 
 ### React Frontend
-* Run `npm run start`, keep this running as it is required for viewing the web app.
+* Run `npm run start`
+* Keep this running as it is required for viewing the web app.
 * Follow the url returned by this command on your browser.
 
 ## Instructions
