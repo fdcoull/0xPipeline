@@ -6,9 +6,13 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
+import Modal from "react-bootstrap/Modal";
+import Button from 'react-bootstrap/Button';
+import Nav from 'react-bootstrap/Nav';
 
 const Transport = ({ setView, view, account, loadBlockchainData, contract }) => {
     const [shipments, setShipments] = useState([]);
+    const [showAddMenu, setShowAddMenu] = useState(false); 
     
     const loadContractData = async () => {
         if (contract) {
@@ -45,7 +49,9 @@ const Transport = ({ setView, view, account, loadBlockchainData, contract }) => 
     return (
         <Container fluid>
             <h2>Transport page</h2>
-            <Toolbar setView={setView} view={view}/>
+            <Nav.Item>
+                <Button variant="primary" onClick={() => setShowAddMenu(true)}>Add</Button>
+            </Nav.Item>
             {shipments.length > 0 ? (
             <Table striped bordered hover>
                 <thead>
@@ -79,6 +85,18 @@ const Transport = ({ setView, view, account, loadBlockchainData, contract }) => 
             ) : (
             <p>Nothing to show.</p>
             )}
+            <Modal show={showAddMenu} onHide={() => setShowAddMenu(false)} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Add Shipment</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowAddMenu(false)}>Close</Button>
+                    <Button variant="primary">Save</Button>
+                </Modal.Footer>
+            </Modal>
         </Container>
     );
 }

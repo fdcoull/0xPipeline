@@ -17,7 +17,7 @@ const Toolbar = ({ setView, view }) => {
             )}
             {view === "transport" && (
                 <Nav.Item>
-                <Button variant="primary" onClick={() => setView("material.add")}>Add</Button>
+                <Button variant="primary" onClick={() => setShowAddMenu(true)}>Add</Button>
                 </Nav.Item>
             )}
         </Nav>
