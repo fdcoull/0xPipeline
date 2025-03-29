@@ -1,7 +1,16 @@
-![alt text](public/logo-full.png)
+<div style="display: flex; justify-content: center;">
+<img src="public/logo-full.png" alt="0xPipeline Logo" style="width:50%;">
+</div>
+
+A blockchain based supply chain management system built with Solidity and React. Use 0xP Material to document raw materials, 0xP Fabricate to record manufacturing components and BOMs, and use 0xP Transport to handle shipping.
+
+<div style="display: flex; justify-content: space-between; gap: 20px;">
+  <img src="public/0xp-material-white.png" alt="0xP Material Logo" style="width: 30%;">
+  <img src="public/0xp-fabricate-white.png" alt="0xP Fabricate Logo" style="width: 30%;">
+  <img src="public/0xp-transport-white.png" alt="0xP Transport Logo" style="width: 30%;">
+</div>
 
 ## Installation
-
 
 ## Changelog
 ### 0.12.0
