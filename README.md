@@ -62,6 +62,7 @@ A blockchain based supply chain management system built with Solidity and React.
 * Add part fabricate feature added
 * Manufacture product fabricate feature added
 * Add order fabricate feature added
+* Add BOM fabricate feature added
 
 ### 0.13.0
 * Added list material feature
