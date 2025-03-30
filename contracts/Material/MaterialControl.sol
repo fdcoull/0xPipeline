@@ -42,7 +42,6 @@ contract MaterialControl {
 
     // List new material
     function list(
-        uint256 _id, 
         string memory _name,
         uint256 _quantity,
         string memory _quantity_unit,
@@ -55,7 +54,7 @@ contract MaterialControl {
         materialCount++;
 
         // Save to materials mapping at _id parameter
-        materials[_id] = material;
+        materials[materialCount] = material;
     }
 
     // Add batch to material entry

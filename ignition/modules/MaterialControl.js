@@ -11,7 +11,6 @@ module.exports = buildModule("MaterialControlModule", (m) => {
     // Add sample data
 
     const transaction1 = m.call(materialControl, "list", [
-        1,
         "Test",
         0,
         "kg",
