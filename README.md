@@ -58,11 +58,12 @@ A blockchain based supply chain management system built with Solidity and React.
 ### Transport
 
 ## Changelog
-### 0.14.0
+### 1.0.0
 * Add part fabricate feature added
 * Manufacture product fabricate feature added
 * Add order fabricate feature added
 * Add BOM fabricate feature added
+* Initial full release
 
 ### 0.13.0
 * Added list material feature
