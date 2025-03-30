@@ -26,12 +26,12 @@ const Transport = ({ setView, view, account, loadBlockchainData, contract }) => 
     // Validation
     const isFormValid = () => {
         return (
-          orderNo.trim() !== '' &&
-          !isNaN(Number(weight)) &&
-          Number(weight) > 0 &&
-          recipient.trim() !== ''
+            orderNo.trim() !== '' &&
+            !isNaN(Number(weight)) &&
+            Number(weight) > 0 &&
+            recipient.trim() !== ''
         );
-      };
+    };
 
     
     const methodPrices = [1, 2, 3, 4];
