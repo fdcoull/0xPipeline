@@ -12,8 +12,8 @@ import Nav from "react-bootstrap/Nav";
 
 const Account = ({ setView, account, loadBlockchainData, pipelineContract }) => {
     const [materialProviders, setMaterialProviders] = useState([]);
-    const [transactionProviders, setTransactionProviders] = useState([]);
-    const [fabricationProviders, setFabricationProviders] = useState([]);
+    const [transportProviders, setTransportProviders] = useState([]);
+    const [fabricateProviders, setFabricateProviders] = useState([]);
 
     // Form state
     const [showAddProvider, setShowAddProvider] = useState(false);
@@ -30,12 +30,12 @@ const Account = ({ setView, account, loadBlockchainData, pipelineContract }) => 
                 ]);
 
                 setMaterialProviders(materials);
-                setTransactionProviders(transactions);
-                setFabricationProviders(fabrications);
+                setTransportProviders(transactions);
+                setFabricateProviders(fabrications);
 
                 console.log('Material Providers:', materialProviders);
-                console.log('Transaction Providers:', transactionProviders);
-                console.log('Fabrication Providers:', fabricationProviders);
+                console.log('Transaction Providers:', transportProviders);
+                console.log('Fabrication Providers:', fabricateProviders);
                 
             } catch (error) {
                 console.error("Error loading providers:", error);
@@ -51,7 +51,7 @@ const Account = ({ setView, account, loadBlockchainData, pipelineContract }) => 
             
             if (selectedProviderType === "material") {
                 transaction = await pipelineContract.addMaterialProvider(newProviderAddress);
-            } else if (selectedProviderType === "fabrication") {
+            } else if (selectedProviderType === "fabricate") {
                 transaction = await pipelineContract.addFabricateProvider(newProviderAddress);
             } else if (selectedProviderType === "transport") {
                 transaction = await pipelineContract.addTransportProvider(newProviderAddress);
@@ -80,10 +80,39 @@ const Account = ({ setView, account, loadBlockchainData, pipelineContract }) => 
                 <>
                 <h3>Material Providers</h3>
                 <Button variant="warning" onClick={() => {setShowAddProvider(true); setSelectedProviderType("material");}}>Add</Button>
+                <ul>
+                    {materialProviders.length > 0 ? (
+                        materialProviders.map((provider, index) => (
+                            <li key={index}>{provider}</li>
+                        ))
+                    ) : (
+                        <p>No material providers added yet.</p>
+                    )}
+                </ul>
+                
                 <h3>Fabricate Providers</h3>
                 <Button variant="danger" onClick={() => {setShowAddProvider(true); setSelectedProviderType("fabricate");}}>Add</Button>
+                <ul>
+                    {fabricateProviders.length > 0 ? (
+                        fabricateProviders.map((provider, index) => (
+                            <li key={index}>{provider}</li>
+                        ))
+                    ) : (
+                        <p>No fabricate providers added yet.</p>
+                    )}
+                </ul>
+                
                 <h3>Transport Providers</h3>
                 <Button variant="primary" onClick={() => {setShowAddProvider(true); setSelectedProviderType("transport");}}>Add</Button>
+                <ul>
+                    {transportProviders.length > 0 ? (
+                        transportProviders.map((provider, index) => (
+                            <li key={index}>{provider}</li>
+                        ))
+                    ) : (
+                        <p>No transport providers added yet.</p>
+                    )}
+                </ul>
                 </>
             ) : (
                 <p>Please connect to your wallet.</p>
