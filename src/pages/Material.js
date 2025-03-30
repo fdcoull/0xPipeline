@@ -71,25 +71,46 @@ const Material = ({ setView, view, account, loadBlockchainData, contract }) => {
 
     // Post list material form to blockchain
     const postListMaterial = async () => {
-            if (!contract) return;
-    
-            setIsListMaterialSubmitting(true);
-    
-            try {
-                const transaction = await contract.list(
-                    listMaterialName,
-                    BigInt(listMaterialQuantity),
-                    listMaterialQuantityUnit,
-                    BigInt(listMaterialCost)
-                );
-    
-                setShowListMaterial(false);
-                loadContractData();
-            } catch (err){
-                console.error("List material failed:", err);
-            } finally {
-                setIsListMaterialSubmitting(false);
-            }
+        if (!contract) return;
+
+        setIsListMaterialSubmitting(true);
+
+        try {
+            const transaction = await contract.list(
+                listMaterialName,
+                BigInt(listMaterialQuantity),
+                listMaterialQuantityUnit,
+                BigInt(listMaterialCost)
+            );
+
+            setShowListMaterial(false);
+            loadContractData();
+        } catch (err){
+            console.error("List material failed:", err);
+        } finally {
+            setIsListMaterialSubmitting(false);
+        }
+    }
+
+    // Post add batch form to blockchain
+    const postAddBatch = async () => {
+        if (!contract) return;
+
+        setIsAddBatchSubmitting(true);
+
+        try {
+            const transaction = await contract.addBatch(
+                BigInt(addBatchId),
+                BigInt(addBatchQuantity)
+            );
+
+            setShowAddBatch(false);
+            loadContractData();
+        } catch (err){
+            console.error("Add batch failed:", err);
+        } finally {
+            setIsAddBatchSubmitting(false);
+        }
     }
 
     useEffect(() => {
@@ -100,8 +121,9 @@ const Material = ({ setView, view, account, loadBlockchainData, contract }) => {
         <Container fluid>
             <h2>Material page</h2>
             <Nav.Item>
-                <Button variant="warning" onClick={() => setShowListMaterial(true)}>List Material</Button>
-                </Nav.Item>
+                <Button variant="warning" className="m-1" onClick={() => setShowListMaterial(true)}>List Material</Button>
+                <Button variant="warning" className="m-1" onClick={() => setShowAddBatch(true)}>Add Batch</Button>
+            </Nav.Item>
             {materials.length > 0 ? (
             <Table striped bordered hover>
                 <thead>
@@ -156,6 +178,28 @@ const Material = ({ setView, view, account, loadBlockchainData, contract }) => {
                     <Button variant="secondary" onClick={() => setShowListMaterial(false)}>Close</Button>
                     <Button variant="primary" disabled={!isListMaterialValid() || isListMaterialSubmitting} onClick={postListMaterial}>Save</Button>
                     {isListMaterialSubmitting ? "Processing..." : "List a new material"}
+                </Modal.Footer>
+            </Modal>
+            <Modal show={showAddBatch} onHide={() => setShowAddBatch(false)} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Add Batch</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group className="mb-3" controlId="formId">
+                            <Form.Label>ID</Form.Label>
+                            <Form.Control type="number" onChange={(e) => setAddBatchId(e.target.value)}></Form.Control>
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formQuantity">
+                            <Form.Label>Quantity</Form.Label>
+                            <Form.Control type="number" onChange={(e) => setAddBatchQuantity(e.target.value)}></Form.Control>
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    {isAddBatchSubmitting ? "Processing..." : "Add a new batch"}
+                    <Button variant="secondary" onClick={() => setShowAddBatch(false)}>Close</Button>
+                    <Button variant="primary" disabled={!isAddBatchValid() || isAddBatchSubmitting} onClick={postAddBatch}>Save</Button>
                 </Modal.Footer>
             </Modal>
         </Container>
