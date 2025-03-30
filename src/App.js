@@ -44,16 +44,18 @@ function App() {
     const userAccount = accounts[0];
     setAccount(userAccount);
 
+    const signer = provider.getSigner();
+
     // Create material control instance
-    const materialContract = new ethers.Contract(materialContractAddress, MaterialControl, provider);
+    const materialContract = new ethers.Contract(materialContractAddress, MaterialControl, signer);
     setMaterialContract(materialContract);
 
     // Create fabricate control instance
-    const fabricateContract = new ethers.Contract(fabricateContractAddress, FabricateControl, provider);
+    const fabricateContract = new ethers.Contract(fabricateContractAddress, FabricateControl, signer);
     setFabricateContract(fabricateContract);
 
     // Create transport control instance
-    const transportContract = new ethers.Contract(transportContractAddress, TransportControl, provider);
+    const transportContract = new ethers.Contract(transportContractAddress, TransportControl, signer);
     setTransportContract(transportContract);
   }
 

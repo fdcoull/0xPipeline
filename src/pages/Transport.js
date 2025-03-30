@@ -2,17 +2,39 @@ import React from "react";
 import { useEffect, useState } from 'react'
 import Toolbar from '../components/Toolbar';
 
+import { parseEther } from 'ethers';
+import { ethers } from 'ethers';
+
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
 import Modal from "react-bootstrap/Modal";
 import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
+import Form from 'react-bootstrap/Form';
 
 const Transport = ({ setView, view, account, loadBlockchainData, contract }) => {
     const [shipments, setShipments] = useState([]);
     const [showAddMenu, setShowAddMenu] = useState(false); 
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    // Add shipment fields
+    const [orderNo, setOrderNo] = useState('');
+    const [weight, setWeight] = useState('');
+    const [recipient, setRecipient] = useState('');
+    const [method, setMethod] = useState(0);
+
+    // Validation
+    const isFormValid = () => {
+        return (
+          orderNo.trim() !== '' &&
+          !isNaN(Number(weight)) &&
+          Number(weight) > 0 &&
+          recipient.trim() !== ''
+        );
+      };
+
+    
+    const methodPrices = [1, 2, 3, 4];
     
     const loadContractData = async () => {
         if (contract) {
@@ -39,6 +61,29 @@ const Transport = ({ setView, view, account, loadBlockchainData, contract }) => 
             } catch (error) {
                 console.error("Error loading materials:", error);
             }
+        }
+    }
+
+    const postShipment = async () => {
+        if (!contract) return;
+
+        setIsSubmitting(true);
+
+        try {
+            const transaction = await contract.ship(
+                BigInt(orderNo),
+                BigInt(weight),
+                recipient,
+                method,
+                { value: ethers.parseUnits(methodPrices[method].toString(), "ether") }
+            );
+
+            setShowAddMenu(false);
+            loadContractData();
+        } catch (err){
+            console.error("Shipment failed:", err);
+        } finally {
+            setIsSubmitting(false);
         }
     }
 
@@ -90,11 +135,34 @@ const Transport = ({ setView, view, account, loadBlockchainData, contract }) => 
                     <Modal.Title>Add Shipment</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    
+                    <Form>
+                        <Form.Group className="mb-3" controlId="formSenderOrderNo">
+                            <Form.Label>Sender Order No.</Form.Label>
+                            <Form.Control type="number" onChange={(e) => setOrderNo(e.target.value)}></Form.Control>
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formWeight">
+                            <Form.Label>Weight</Form.Label>
+                            <Form.Control type="number" onChange={(e) => setWeight(parseInt(e.target.value))}></Form.Control>
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formRecipient">
+                            <Form.Label>Recipient</Form.Label>
+                            <Form.Control type="text" onChange={(e) => setRecipient(e.target.value)}></Form.Control>
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formMethod">
+                            <Form.Label>Method</Form.Label>
+                            <Form.Select onChange={(e) => setMethod(parseInt(e.target.value))}>
+                                <option value="0">Standard</option>
+                                <option value="1">Two Day</option>
+                                <option value="2">Next Day</option>
+                                <option value="3">Weekend</option>
+                            </Form.Select>
+                        </Form.Group>
+                    </Form>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShowAddMenu(false)}>Close</Button>
-                    <Button variant="primary">Save</Button>
+                    <Button variant="primary" disabled={!isFormValid() || isSubmitting} onClick={postShipment}>Save</Button>
+                    {isSubmitting ? "Processing..." : "Create Shipment"}
                 </Modal.Footer>
             </Modal>
         </Container>
