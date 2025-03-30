@@ -95,7 +95,7 @@ const Transport = ({ setView, view, account, loadBlockchainData, contract }) => 
         <Container fluid>
             <h2>Transport page</h2>
             <Nav.Item>
-                <Button variant="primary" onClick={() => setShowAddMenu(true)}>Add</Button>
+                <Button variant="primary" className="m-1" onClick={() => setShowAddMenu(true)}>Add</Button>
             </Nav.Item>
             {shipments.length > 0 ? (
             <Table striped bordered hover>
