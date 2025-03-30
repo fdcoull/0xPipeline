@@ -57,7 +57,7 @@ const Fabricate = ({ setView, view, account, loadBlockchainData, contract }) => 
         }
     }
 
-    // Post list material form to blockchain
+    // Post add part form to blockchain
     const postAddPart = async () => {
         if (!contract) return;
 
