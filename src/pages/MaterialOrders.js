@@ -1,16 +1,30 @@
 import React from "react";
 import { useEffect, useState } from 'react'
 import Toolbar from '../components/Toolbar';
+import { ethers } from 'ethers';
 
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
+import Nav from "react-bootstrap/Nav";
+import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
 
 
 const MaterialOrders = ({ setView, view, account, loadBlockchainData, contract }) => {
     const [orders, setOrders] = useState([]);
+
+    // Add order state
+    const [showAddOrder, setShowAddOrder] = useState(false); 
+    const [isAddOrderSubmitting, setIsAddOrderSubmitting] = useState(false);
+    const [addOrderId, setAddOrderId] = useState(0);
+    const [addOrderQuantity, setAddOrderQuantity] = useState(0);
+    const isAddOrderValid = () => {
+        return (
+            !isNaN(Number(addOrderId)) &&
+            !isNaN(Number(addOrderQuantity))
+        );
+    };
 
     const loadContractData = async () => {
         if (contract) {
@@ -43,6 +57,32 @@ const MaterialOrders = ({ setView, view, account, loadBlockchainData, contract }
         
     }
 
+    // Post add order form to blockchain
+    const postAddOrder = async () => {
+        if (!contract) return;
+
+        setIsAddOrderSubmitting(true);
+
+        try {
+            const material = await contract.materials(BigInt(addOrderId));
+            const costPerUnit = BigInt(material.cost);
+            const totalCost = costPerUnit * BigInt(addOrderQuantity);
+
+            const transaction = await contract.buy(
+                BigInt(addOrderId),
+                BigInt(addOrderQuantity),
+                { value: ethers.parseUnits(totalCost.toString(), "ether") }
+            );
+
+            setShowAddOrder(false);
+            loadContractData();
+        } catch (err){
+            console.error("Add order failed:", err);
+        } finally {
+            setIsAddOrderSubmitting(false);
+        }
+    }
+
     useEffect(() => {
         loadContractData();
     }, [contract]);
@@ -50,7 +90,9 @@ const MaterialOrders = ({ setView, view, account, loadBlockchainData, contract }
     return (
         <Container fluid>
             <h2>Orders</h2>
-            <Toolbar setView={setView} view={view}/>
+            <Nav.Item>
+                <Button variant="warning" className="m-1" onClick={() => setShowAddOrder(true)}>Add Order</Button>
+            </Nav.Item>
             {orders.length > 0 ? (
             <Table striped bordered hover>
                 <thead>
@@ -77,6 +119,28 @@ const MaterialOrders = ({ setView, view, account, loadBlockchainData, contract }
             ) : (
             <p>Nothing to show.</p>
             )}
+            <Modal show={showAddOrder} onHide={() => setShowAddOrder(false)} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Add Order</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group className="mb-3" controlId="formId">
+                            <Form.Label>ID</Form.Label>
+                            <Form.Control type="number" onChange={(e) => setAddOrderId(e.target.value)}></Form.Control>
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formQuantity">
+                            <Form.Label>Quantity</Form.Label>
+                            <Form.Control type="number" onChange={(e) => setAddOrderQuantity(e.target.value)}></Form.Control>
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    {isAddOrderSubmitting ? "Processing..." : "Add a new order"}
+                    <Button variant="secondary" onClick={() => setShowAddOrder(false)}>Close</Button>
+                    <Button variant="primary" disabled={!isAddOrderValid() || isAddOrderSubmitting} onClick={postAddOrder}>Save</Button>
+                </Modal.Footer>
+            </Modal>
         </Container>
     );
 }

@@ -119,7 +119,7 @@ const Material = ({ setView, view, account, loadBlockchainData, contract }) => {
 
     return (
         <Container fluid>
-            <h2>Material page</h2>
+            <h2>Materials</h2>
             <Nav.Item>
                 <Button variant="warning" className="m-1" onClick={() => setShowListMaterial(true)}>List Material</Button>
                 <Button variant="warning" className="m-1" onClick={() => setShowAddBatch(true)}>Add Batch</Button>
