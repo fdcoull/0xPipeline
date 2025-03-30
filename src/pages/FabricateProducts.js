@@ -127,7 +127,7 @@ const FabricateProducts = ({ setView, view, account, loadBlockchainData, contrac
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShowManufactureProduct(false)}>Close</Button>
-                    <Button variant="primary" disabled={!isManufactureProductValid() || isManufactureProductSubmitting} onClick={postManufactureProduct}>Save</Button>
+                    <Button variant="danger" disabled={!isManufactureProductValid() || isManufactureProductSubmitting} onClick={postManufactureProduct}>Save</Button>
                     {isManufactureProductSubmitting ? "Processing..." : "Manufacture a product"}
                 </Modal.Footer>
             </Modal>

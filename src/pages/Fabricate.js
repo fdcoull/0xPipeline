@@ -142,7 +142,7 @@ const Fabricate = ({ setView, view, account, loadBlockchainData, contract }) => 
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShowAddPart(false)}>Close</Button>
-                    <Button variant="primary" disabled={!isAddPartValid() || isAddPartSubmitting} onClick={postAddPart}>Save</Button>
+                    <Button variant="danger" disabled={!isAddPartValid() || isAddPartSubmitting} onClick={postAddPart}>Save</Button>
                     {isAddPartSubmitting ? "Processing..." : "Add a new part"}
                 </Modal.Footer>
             </Modal>
