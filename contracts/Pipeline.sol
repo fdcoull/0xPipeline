@@ -33,15 +33,15 @@ contract Pipeline {
     }
 
     // Setters
-    function addMaterialProvider(string memory _provider) public onlyOwner {
+    function addMaterialProvider(address _provider) public onlyOwner {
         materialProviders.push(_provider);
     }
 
-    function addFabricateProvider(string memory _provider) public onlyOwner {
+    function addFabricateProvider(address _provider) public onlyOwner {
         fabricateProviders.push(_provider);
     }
 
-    function addTransportProvider(string memory _provider) public onlyOwner {
+    function addTransportProvider(address _provider) public onlyOwner {
         transportProviders.push(_provider);
     }
 }
