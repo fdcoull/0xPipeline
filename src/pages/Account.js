@@ -29,9 +29,14 @@ const Account = ({ setView, account, loadBlockchainData, pipelineContract }) => 
                     pipelineContract.getAllFabricateProviders()
                 ]);
 
-                setMaterialProviders(materialProviders);
-                setTransactionProviders(transactionProviders);
-                setFabricationProviders(fabricationProviders);
+                setMaterialProviders(materials);
+                setTransactionProviders(transactions);
+                setFabricationProviders(fabrications);
+
+                console.log('Material Providers:', materialProviders);
+                console.log('Transaction Providers:', transactionProviders);
+                console.log('Fabrication Providers:', fabricationProviders);
+                
             } catch (error) {
                 console.error("Error loading providers:", error);
             }
@@ -39,7 +44,25 @@ const Account = ({ setView, account, loadBlockchainData, pipelineContract }) => 
     }
 
     const addProvider = async () => {
-        return 0;
+        if (!pipelineContract || !newProviderAddress) return;
+
+        try {
+            let transaction;
+            
+            if (selectedProviderType === "material") {
+                transaction = await pipelineContract.addMaterialProvider(newProviderAddress);
+            } else if (selectedProviderType === "fabrication") {
+                transaction = await pipelineContract.addFabricateProvider(newProviderAddress);
+            } else if (selectedProviderType === "transport") {
+                transaction = await pipelineContract.addTransportProvider(newProviderAddress);
+            }
+    
+            setShowAddProvider(false);
+            setNewProviderAddress("");
+            loadProviderData();
+        } catch (error) {
+            console.error("Error adding provider:", error);
+        }
     }
 
     useEffect(() => {
@@ -56,11 +79,11 @@ const Account = ({ setView, account, loadBlockchainData, pipelineContract }) => 
             {account ? (
                 <>
                 <h3>Material Providers</h3>
-                <Button variant="warning" onClick={() => setShowAddProvider(true)}>Add</Button>
+                <Button variant="warning" onClick={() => {setShowAddProvider(true); setSelectedProviderType("material");}}>Add</Button>
                 <h3>Fabricate Providers</h3>
-                <Button variant="danger" onClick={() => setShowAddProvider(true)}>Add</Button>
+                <Button variant="danger" onClick={() => {setShowAddProvider(true); setSelectedProviderType("fabricate");}}>Add</Button>
                 <h3>Transport Providers</h3>
-                <Button variant="primary" onClick={() => setShowAddProvider(true)}>Add</Button>
+                <Button variant="primary" onClick={() => {setShowAddProvider(true); setSelectedProviderType("transport");}}>Add</Button>
                 </>
             ) : (
                 <p>Please connect to your wallet.</p>
