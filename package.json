@@ -1,6 +1,6 @@
 {
   "name": "0xpipeline",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A blockchain based supply chain management system.",
   "main": "hardhat.config.js",
   "scripts": {
