@@ -17,6 +17,7 @@ import Home from './pages/Home';
 import Account from './pages/Account';
 import AccountMaterial from './pages/AccountMaterial';
 import AccountFabricate from './pages/AccountFabricate';
+import AccountTransport from './pages/AccountTransport';
 import Material from './pages/Material';
 import MaterialOrders from './pages/MaterialOrders';
 import Fabricate from './pages/Fabricate';
@@ -81,6 +82,7 @@ function App() {
       {view === "account" && <Account setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} pipelineContract={pipelineContract}/>}
       {view === "account.material" && <AccountMaterial setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} pipelineContract={pipelineContract} fabricateContract={fabricateContract} signer={signer}/>}
       {view === "account.fabricate" && <AccountFabricate setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} pipelineContract={pipelineContract} myFabricateContract={fabricateContract} signer={signer}/>}
+      {view === "account.transport" && <AccountTransport setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} pipelineContract={pipelineContract} myFabricateContract={fabricateContract} signer={signer}/>}
       {view === "material" && <Material setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} contract={materialContract}/>}
       {view === "material.orders" && <MaterialOrders setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} contract={materialContract}/>}
       {view === "fabricate" && <Fabricate setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} contract={fabricateContract}/>}
