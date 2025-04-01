@@ -17,6 +17,12 @@ import MaterialControl from '../abis/MaterialControl.json';
 const AccountMaterial = ({ setView, account, loadBlockchainData, pipelineContract, signer }) => {
     const [providerMaterials, setProviderMaterials] = useState([]);
 
+    // Modal state
+    const [showBuyModal, setShowBuyModal] = useState(false);
+    const [selectedMaterial, setSelectedMaterial] = useState(null);
+    const [selectedProvider, setSelectedProvider] = useState("");
+    const [quantity, setQuantity] = useState(1);
+
     const loadMaterialData = async () => {
         if (!pipelineContract || !signer) return;
 
@@ -55,6 +61,17 @@ const AccountMaterial = ({ setView, account, loadBlockchainData, pipelineContrac
         }
     }
 
+    const buyMaterial = async (provider, materialId, cost) => {
+        if (!signer) return;
+
+        try {
+            const materialContract = new ethers.Contract(provider, MaterialControl, signer);
+
+        } catch (err) {
+            console.error("Error purchasing material:", error);
+        }
+    }
+
     useEffect(() => {
         if (signer && pipelineContract) {
             loadMaterialData();
@@ -85,13 +102,35 @@ const AccountMaterial = ({ setView, account, loadBlockchainData, pipelineContrac
                                 <td>{material.quantity}</td>
                                 <td>{material.quantity_unit}</td>
                                 <td>{material.cost}</td>
-                                <td><Button variant="warning" onClick={() => buyMaterial(providerData.provider, material.id, material.cost)}>Buy</Button></td>
+                                <td><Button variant="warning" onClick={() => {setSelectedProvider(providerData.provider); setSelectedMaterial(material); setQuantity(1); setShowBuyModal(true);}}>Buy</Button></td>
                             </tr>
                         ))}
                     </tbody>
                 </Table>
             </div>
         ))}
+        <Modal show={showBuyModal} onHide={() => setShowBuyModal(false)} centered>
+        <Modal.Header closeButton>
+            <Modal.Title>Buy {selectedMaterial?.name}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+            <Form>
+                <Form.Group className="mb-3">
+                    <Form.Label>Quantity</Form.Label>
+                    <Form.Control 
+                        type="number" 
+                        value={quantity} 
+                        min="1"
+                        onChange={(e) => setQuantity(e.target.value)}
+                    />
+                </Form.Group>
+            </Form>
+        </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={() => setShowBuyModal(false)}>Cancel</Button>
+                <Button variant="warning" onClick={() => buyMaterial(selectedProvider, selectedMaterial.id, quantity, selectedMaterial.cost)}>Confirm Purchase</Button>
+            </Modal.Footer>
+        </Modal>
         </Container>
     );
 }
