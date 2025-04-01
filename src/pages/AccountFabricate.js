@@ -61,6 +61,60 @@ const AccountMaterial = ({ setView, account, loadBlockchainData, pipelineContrac
         }
     }
 
+    const buyProduct = async (provider, productId, quantity, costPerUnit) => {
+        if (!signer || !myFabricateContract) return;
+
+        try {
+            const fabricateContract = new ethers.Contract(provider, FabricateControl, signer);
+            const totalCost = BigInt(costPerUnit * quantity);
+
+            // Purchase product
+            const transaction = await fabricateContract.buy(productId, quantity, { value: totalCost });
+
+            // Get material details
+            const product = await fabricateContract.products(productId);
+            const productName = product.name;
+            const productUnit = product.quantity_unit;
+            const productCost = product.cost;
+
+            // Check if exists in users fabricate parts list
+            const partCount = await myFabricateContract.partCount();
+            let existingPartId = null;
+
+            for (let i = 1; i <= partCount; i++) {
+                const part = await myFabricateContract.parts(i);
+                if (part.name === materialName) {
+                    existingPartId = i;
+                    break;
+                }
+            }
+
+            if (existingPartId !== null) {
+                // Add to stock level
+                const transaction2 = await myFabricateContract.increasePartStock(
+                    existingPartId,
+                    quantity
+                );
+
+            } else {
+                // Create new part
+                const transaction2 = await myFabricateContract.addNewPart(
+                    productName,
+                    quantity,
+                    productUnit,
+                    productCost
+                );
+            }
+
+            setShowBuyModal(false);
+
+            loadMaterialData();
+
+        } catch (err) {
+            console.error("Error purchasing material:", err);
+        }
+    }
+
     useEffect(() => {
             if (signer && pipelineContract) {
                 loadMaterialData();
