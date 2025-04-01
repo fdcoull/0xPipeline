@@ -62,7 +62,7 @@ const AccountMaterial = ({ setView, account, loadBlockchainData, pipelineContrac
     }
 
     const buyMaterial = async (provider, materialId, quantity, costPerUnit) => {
-        if (!signer || fabricateContract) return;
+        if (!signer || !fabricateContract) return;
 
         try {
             const materialContract = new ethers.Contract(provider, MaterialControl, signer);
@@ -83,22 +83,28 @@ const AccountMaterial = ({ setView, account, loadBlockchainData, pipelineContrac
 
             for (let i = 1; i <= partCount; i++) {
                 const part = await fabricateContract.parts(i);
-                existingPartId = i;
-                break;
+                if (part.name === materialName) {
+                    existingPartId = i;
+                    break;
+                }
             }
 
             if (existingPartId !== null) {
-                // Need to add contract func to handle
+                // Add to stock level
+                const transaction2 = await fabricateContract.increasePartStock(
+                    existingPartId,
+                    quantity
+                );
+
             } else {
                 // Create new part
-                const transaction2 = await fabricateContract.addPart(
+                const transaction2 = await fabricateContract.addNewPart(
                     materialName,
                     quantity,
                     materialUnit,
                     materialCost
                 );
             }
-
 
             setShowBuyModal(false);
 
