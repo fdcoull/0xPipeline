@@ -16,18 +16,18 @@ module.exports = buildModule("SampleDataModule", (m) => {
 
     // Material Contract 1 sample data
     const transaction1 = m.call(materialControl1, "list", [
-        "Steel",
-        500,
-        "kg",
+        "Transparent Sheet Plastic 25x10CM",
+        200,
+        "units",
         1,
     ]);
 
     // Material Contract 2 sample data
     const transaction2 = m.call(materialControl2, "list", [
-        "Iron",
-        800,
-        "kg",
-        1,
+        "Black Plastic",
+        2000,
+        "g",
+        2,
     ]);
 
     // Fabricate Contract 1 sample data
@@ -47,7 +47,7 @@ module.exports = buildModule("SampleDataModule", (m) => {
 
     const transaction4 = m.call(fabricateControl1, "addNewBomProduct", [
         components1,
-        "Test Assembled Product",
+        "Microcontroller and RTC",
         "units",
         2
     ], {after: [transaction3], id: "AddProduct1"});
@@ -59,7 +59,7 @@ module.exports = buildModule("SampleDataModule", (m) => {
 
     // Fabricate Contract 2 sample data
     const transaction6 = m.call(fabricateControl2, "addNewPart", [
-        "TEST 2",
+        "TEST2",
         750,
         "units",
         1
@@ -74,7 +74,7 @@ module.exports = buildModule("SampleDataModule", (m) => {
 
     const transaction7 = m.call(fabricateControl2, "addNewBomProduct", [
         components2,
-        "Test Assembled Product",
+        "LCD Display 25x10CM",
         "units",
         2
     ], {after: [transaction6], id: "AddProduct2"});
@@ -84,5 +84,5 @@ module.exports = buildModule("SampleDataModule", (m) => {
         75
     ], {after: [transaction7], id: "Manufacture2"});
     
-    return { materialControl1, materialControl2, fabricateControl1, fabricateControl2 };
+    return { materialControl1, materialControl2, fabricateControl1, fabricateControl2, transportControl1 };
 });
