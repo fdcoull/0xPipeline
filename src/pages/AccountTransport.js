@@ -19,9 +19,16 @@ const AccountTransport = ({ setView, account, loadBlockchainData, pipelineContra
     //const [providerProducts, setProviderProducts] = useState([]);
     const [orders, setOrders] = useState([]);
     const [shippedOrders, setShippedOrders] = useState([]);
+    const [transportProviders, setTransportProviders] = useState([]);
+
+    // Modal state
+    const [showShipModal, setShowShipModal] = useState(false);
+    const [selectedProvider, setSelectedProvider] = useState("");
+    const [selectedMethod, setSelectedMethod] = useState(0);
+    const [selectedOrderNo, setSelectedOrderNo] = useState("");
 
     const loadContractData = async () => {
-        if (myFabricateContract && pipelineContract) {
+        if (myFabricateContract && pipelineContract && account) {
             try {
                 const loadedOrders = [];
                 const shippedOrders = [];
@@ -45,6 +52,8 @@ const AccountTransport = ({ setView, account, loadBlockchainData, pipelineContra
                 }
 
                 const transportProviderAddresses = await pipelineContract.getAllTransportProviders();
+                setTransportProviders(transportProviderAddresses);
+                
                 const shippedOrderNumbers = [];
 
                 for (const address of transportProviderAddresses) {
@@ -93,12 +102,19 @@ const AccountTransport = ({ setView, account, loadBlockchainData, pipelineContra
         }
     }
 
+    const shipOrder = async (provider, productId, quantity, costPerUnit) => {
+        return 0;
+    }
+
     useEffect(() => {
         loadContractData();
     }, []);
     
     return (
         <Container fluid>
+            <h2>Transport Providers</h2>
+            {account && transportProviders && (
+            <>
             <h3>Unshipped Orders</h3>
             <Table striped bordered hover>
                 <thead>
@@ -118,6 +134,7 @@ const AccountTransport = ({ setView, account, loadBlockchainData, pipelineContra
                             <td>{order.quantity}</td>
                             <td>{order.buyer}</td>
                             <td>{order.time}</td>
+                            <td><Button variant="primary" onClick={() => {setShowShipModal(true), setSelectedOrderNo(order.id)}}>Ship</Button></td>
                         </tr>
                     ))}
                 </tbody>
@@ -148,6 +165,42 @@ const AccountTransport = ({ setView, account, loadBlockchainData, pipelineContra
                     ))}
                 </tbody>
             </Table>
+            
+                <Modal show={showShipModal} onHide={() => setShowShipModal(false)}>
+                <Modal.Header closeButton>
+                <Modal.Title>Ship Order</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group controlId="formTransportProvider">
+                            <Form.Label>Select Transport Provider</Form.Label>
+                            <Form.Control as="select" value={selectedProvider} onChange={(e) => setSelectedProvider(e.target.value)}>
+                                <option value="">Select Provider</option>
+                                {transportProviders.map((provider) => (
+                                    <option key={provider} value={provider}>
+                                        {provider}
+                                    </option>
+                                ))}
+                            </Form.Control>
+                        </Form.Group>
+                        <Form.Group controlId="formShippingMethod">
+                            <Form.Label>Shipping Method</Form.Label>
+                            <Form.Control as="select" value={selectedMethod} onChange={(e) => setSelectedMethod(parseInt(e.target.value))}>
+                                <option value={0}>Standard</option>
+                                <option value={1}>TwoDay</option>
+                                <option value={2}>NextDay</option>
+                                <option value={3}>Weekend</option>
+                            </Form.Control>
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowShipModal(false)}>Close</Button>
+                    <Button variant="primary" onClick={shipOrder}>Ship Order</Button>
+                </Modal.Footer>
+            </Modal>
+            </>
+            )}
         </Container>
     );
 }
