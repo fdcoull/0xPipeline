@@ -7,34 +7,42 @@ import Card from "react-bootstrap/Card";
 
 const Home = ({ setView }) => {
     return (
+        <>
         <Container className="text-center">
             <Row className="justify-content-center">
             <img src="logo-full.png" alt="Logo" className="m-4" />
             </Row>
             <hr/>
             <Row className="justify-content-center g-3">
-                <Col xs={12} sm={4} className="d-flex justify-content-center mb-4">
-                <Card onClick={() => setView("material")}>
+                <Col xs={8} className="d-flex justify-content-center mb-4">
+                <Card onClick={() => setView("material")} className="m-4">
+                    <Card.Img variant="top" src="0xp-short.png"/>
+                    <Card.Body className="mt-auto">
+                        <Card.Title>Manage Account</Card.Title>
+                    </Card.Body>
+                </Card>
+                <Card onClick={() => setView("material")} className="m-4">
                     <Card.Img variant="top" src="0xp-material.png"/>
                     <Card.Body>
-                        <Card.Title>Handle raw materials</Card.Title>
+                        <Card.Title>Handle Raw Materials</Card.Title>
                     </Card.Body>
                 </Card>
-                <Card onClick={() => setView("fabricate")}>
+                <Card onClick={() => setView("fabricate")} className="m-4">
                     <Card.Img variant="top" src="0xp-fabricate.png"/>
                     <Card.Body>
-                        <Card.Title>Build new products</Card.Title>
+                        <Card.Title>Build New Products</Card.Title>
                     </Card.Body>
                 </Card>
-                <Card onClick={() => setView("transport")}>
+                <Card onClick={() => setView("transport")} className="m-4">
                     <Card.Img variant="top" src="0xp-transport.png"/>
                     <Card.Body>
-                        <Card.Title>Ship goods</Card.Title>
+                        <Card.Title>Ship Goods</Card.Title>
                     </Card.Body>
                 </Card>
                 </Col>
             </Row>
         </Container>
+        </>
     );
 }
 

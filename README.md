@@ -58,6 +58,11 @@ A blockchain based supply chain management system built with Solidity and React.
 ### Transport
 
 ## Changelog
+### 1.3.1
+* Added admin link to home
+* Fixed home positioning
+
+
 ### 1.3.0
 * Added transport provider view
 * Added transport provider shipping
