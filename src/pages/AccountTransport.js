@@ -27,6 +27,9 @@ const AccountTransport = ({ setView, account, loadBlockchainData, pipelineContra
     const [selectedMethod, setSelectedMethod] = useState(0);
     const [selectedOrderNo, setSelectedOrderNo] = useState("");
 
+    // Change this to get from contract
+    const methodCost = [1, 2, 3, 4];
+
     const loadContractData = async () => {
         if (myFabricateContract && pipelineContract && account) {
             try {
@@ -56,18 +59,22 @@ const AccountTransport = ({ setView, account, loadBlockchainData, pipelineContra
                 
                 const shippedOrderNumbers = [];
 
+                // Loop through transport providers
                 for (const address of transportProviderAddresses) {
                     const transportProvider = new ethers.Contract(address, TransportControl, signer);
 
                     const shipmentCount = await transportProvider.shipmentCount();
 
+                    // Loop through shipments
                     for (let i = 0; i < shipmentCount; i++) {
                         const shipment = await transportProvider.shipments(i);
 
                         const { senderOrderNo, sender, recipient, status, method, cost, weight } = shipment;
 
                         if (sender === account) {
-                            shippedOrderNumbers.add(senderOrderNo.toString());
+                            if (!shippedOrderNumbers.includes(senderOrderNo.toString())) {
+                                shippedOrderNumbers.push(senderOrderNo.toString());
+                            }
 
                             const order = loadedOrders.find(order => order.id === senderOrderNo.toString());
 
@@ -79,7 +86,7 @@ const AccountTransport = ({ setView, account, loadBlockchainData, pipelineContra
                                     shipmentStatus: status,
                                     shipmentCost: cost,
                                     shipmentWeight: weight,
-                                })
+                                });
                             }
                         }
                     }
@@ -93,17 +100,42 @@ const AccountTransport = ({ setView, account, loadBlockchainData, pipelineContra
 
                 setOrders(unshippedOrders);
                 setShippedOrders(shippedOrders);
-
-                console.log(unshippedOrders);
-                console.log(shippedOrders);
             } catch (error) {
                 console.error("Error loading orders:", error);
             }
         }
     }
 
-    const shipOrder = async (provider, productId, quantity, costPerUnit) => {
-        return 0;
+    const shipOrder = async () => {
+        
+        if (!selectedProvider || !selectedOrderNo) {
+            return;
+        }
+
+        const transportContract = new ethers.Contract(selectedProvider, TransportControl, signer);
+
+        // Set this to calculate from order contents later
+        const weight = 1;
+        const method = selectedMethod;
+        const senderOrderNo = selectedOrderNo;
+
+        try {
+            const transaction = await transportContract.ship(
+                senderOrderNo,
+                weight,
+                account,
+                method,
+                { value: methodCost[selectedMethod] }
+            );
+
+            setShowShipModal(false);
+
+            loadContractData();
+
+        } catch (err) {
+            console.error("Error shipping order:", err);
+        }
+
     }
 
     useEffect(() => {
