@@ -14,7 +14,7 @@ import Nav from "react-bootstrap/Nav";
 // ABI
 import MaterialControl from '../abis/MaterialControl.json';
 
-const AccountMaterial = ({ setView, account, loadBlockchainData, pipelineContract, signer }) => {
+const AccountMaterial = ({ setView, account, loadBlockchainData, pipelineContract, signer, fabricateContract }) => {
     const [providerMaterials, setProviderMaterials] = useState([]);
 
     // Modal state
@@ -61,14 +61,51 @@ const AccountMaterial = ({ setView, account, loadBlockchainData, pipelineContrac
         }
     }
 
-    const buyMaterial = async (provider, materialId, cost) => {
-        if (!signer) return;
+    const buyMaterial = async (provider, materialId, quantity, costPerUnit) => {
+        if (!signer || fabricateContract) return;
 
         try {
             const materialContract = new ethers.Contract(provider, MaterialControl, signer);
+            const totalCost = BigInt(costPerUnit * quantity);
+
+            // Purchase material
+            const transaction = await materialContract.buy(materialId, quantity, { value: totalCost });
+
+            // Get material details
+            const material = await materialContract.materials(materialId);
+            const materialName = material.name;
+            const materialUnit = material.quantity_unit;
+            const materialCost = material.cost;
+
+            // Check if exists in users fabricate parts list
+            const partCount = await fabricateContract.partCount();
+            let existingPartId = null;
+
+            for (let i = 1; i <= partCount; i++) {
+                const part = await fabricateContract.parts(i);
+                existingPartId = i;
+                break;
+            }
+
+            if (existingPartId !== null) {
+                // Need to add contract func to handle
+            } else {
+                // Create new part
+                const transaction2 = await fabricateContract.addPart(
+                    materialName,
+                    quantity,
+                    materialUnit,
+                    materialCost
+                );
+            }
+
+
+            setShowBuyModal(false);
+
+            loadMaterialData();
 
         } catch (err) {
-            console.error("Error purchasing material:", error);
+            console.error("Error purchasing material:", err);
         }
     }
 
