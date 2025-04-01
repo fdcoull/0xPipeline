@@ -84,7 +84,59 @@ const AccountTransport = ({ setView, account, loadBlockchainData, pipelineContra
         loadContractData();
     }, []);
     
-    return "test";
+    return (
+        <Container fluid>
+            <h3>Unshipped Orders</h3>
+            <Table striped bordered hover>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Product ID</th>
+                        <th>Quantity</th>
+                        <th>Buyer</th>
+                        <th>Order Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {orders.map((order) => (
+                        <tr key={order.id}>
+                            <td>{order.id}</td>
+                            <td>{order.productId}</td>
+                            <td>{order.quantity}</td>
+                            <td>{order.buyer}</td>
+                            <td>{order.time}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </Table>
+
+            <h3>Shipped Orders</h3>
+            <Table striped bordered hover>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Product ID</th>
+                        <th>Quantity</th>
+                        <th>Buyer</th>
+                        <th>Shipped Date</th>
+                        <th>Carrier</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {shippedOrders.map((shipment) => (
+                        <tr key={shipment.id}>
+                            <td>{shipment.id}</td>
+                            <td>{shipment.productId}</td>
+                            <td>{shipment.quantity}</td>
+                            <td>{shipment.buyer}</td>
+                            <td>{shipment.time}</td>
+                            <td>{shipment.carrier}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </Table>
+        </Container>
+    );
 }
 
 export default AccountTransport
