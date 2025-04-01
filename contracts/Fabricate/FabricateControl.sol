@@ -77,6 +77,15 @@ contract FabricateControl {
         parts[partCount] = part;
     }
 
+    // Increase part stock
+    function increasePartStock(
+        uint256 _id,
+        uint256 _quantity
+    ) public onlyOwner {
+        Part storage part = parts[_id];
+        part.quantity += _quantity;
+    }
+
     // Add new BOM
     function addNewBomProduct(Component[] memory _parts, string memory _name, string memory _quantity_unit, uint256 _cost) public onlyOwner {
         productCount++;
