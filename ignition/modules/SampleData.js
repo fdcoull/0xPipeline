@@ -77,7 +77,7 @@ module.exports = buildModule("SampleDataModule", (m) => {
         2
     ], {after: [transaction6], id: "AddProduct2"});
 
-    const transaction8 = m.call(fabricateControl1, "manufactureProduct", [
+    const transaction8 = m.call(fabricateControl2, "manufactureProduct", [
         1,
         75
     ], {after: [transaction7], id: "Manufacture2"});

@@ -14,7 +14,7 @@ import Nav from "react-bootstrap/Nav";
 // ABI
 import FabricateControl from '../abis/FabricateControl.json';
 
-const AccountMaterial = ({ setView, account, loadBlockchainData, pipelineContract, signer, myFabricateContract }) => {
+const AccountFabricate = ({ setView, account, loadBlockchainData, pipelineContract, signer, myFabricateContract }) => {
     const [providerProducts, setProviderProducts] = useState([]);
 
     // Modal state
@@ -23,7 +23,7 @@ const AccountMaterial = ({ setView, account, loadBlockchainData, pipelineContrac
     const [selectedProvider, setSelectedProvider] = useState("");
     const [quantity, setQuantity] = useState(1);
     
-    const loadMaterialData = async () => {
+    const loadFabricateData = async () => {
         if (!pipelineContract || !signer) return;
 
         try {
@@ -83,7 +83,7 @@ const AccountMaterial = ({ setView, account, loadBlockchainData, pipelineContrac
 
             for (let i = 1; i <= partCount; i++) {
                 const part = await myFabricateContract.parts(i);
-                if (part.name === materialName) {
+                if (part.name === productName) {
                     existingPartId = i;
                     break;
                 }
@@ -108,7 +108,7 @@ const AccountMaterial = ({ setView, account, loadBlockchainData, pipelineContrac
 
             setShowBuyModal(false);
 
-            loadMaterialData();
+            loadFabricateData();
 
         } catch (err) {
             console.error("Error purchasing material:", err);
@@ -117,7 +117,7 @@ const AccountMaterial = ({ setView, account, loadBlockchainData, pipelineContrac
 
     useEffect(() => {
             if (signer && pipelineContract) {
-                loadMaterialData();
+                loadFabricateData();
             }
     }, []);
     
@@ -178,4 +178,4 @@ const AccountMaterial = ({ setView, account, loadBlockchainData, pipelineContrac
     );
 }
 
-export default AccountMaterial;
+export default AccountFabricate;
