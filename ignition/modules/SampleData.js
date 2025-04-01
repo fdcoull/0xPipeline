@@ -12,6 +12,8 @@ module.exports = buildModule("SampleDataModule", (m) => {
     const fabricateControl1 = m.contract("FabricateControl", [], {id: "FabricateControlInstance1"});
     const fabricateControl2 = m.contract("FabricateControl", [], {id: "FabricateControlInstance2"});
 
+    const transportControl1 = m.contract("TransportControl", [], {id: "TransportControlInstance1"});
+
     // Material Contract 1 sample data
     const transaction1 = m.call(materialControl1, "list", [
         "Steel",
@@ -81,7 +83,6 @@ module.exports = buildModule("SampleDataModule", (m) => {
         1,
         75
     ], {after: [transaction7], id: "Manufacture2"});
-
     
     return { materialControl1, materialControl2, fabricateControl1, fabricateControl2 };
 });
