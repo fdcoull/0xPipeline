@@ -15,6 +15,7 @@ import Toolbar from './components/Toolbar';
 // Pages
 import Home from './pages/Home';
 import Account from './pages/Account';
+import AccountMaterial from './pages/AccountMaterial';
 import Material from './pages/Material';
 import MaterialOrders from './pages/MaterialOrders';
 import Fabricate from './pages/Fabricate';
@@ -31,6 +32,7 @@ const pipelineContractAddress = process.env.REACT_APP_PIPELINE_ADDRESS;
 
 function App() {
   const [provider, setProvider] = useState(null);
+  const [signer, setSigner] = useState(null);
   const [materialContract, setMaterialContract] = useState(null);
   const [fabricateContract, setFabricateContract] = useState(null);
   const [transportContract, setTransportContract] = useState(null);
@@ -48,6 +50,7 @@ function App() {
     setAccount(userAccount);
 
     const signer = provider.getSigner();
+    setSigner(signer);
 
     // Create material control instance
     const materialContract = new ethers.Contract(materialContractAddress, MaterialControl, signer);
@@ -75,6 +78,7 @@ function App() {
       {/* View Rendering */}
       {view === "home" && <Home setView={setView} view={view}/>}
       {view === "account" && <Account setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} pipelineContract={pipelineContract}/>}
+      {view === "account.material" && <AccountMaterial setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} pipelineContract={pipelineContract} contract={materialContract} signer={signer}/>}
       {view === "material" && <Material setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} contract={materialContract}/>}
       {view === "material.orders" && <MaterialOrders setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} contract={materialContract}/>}
       {view === "fabricate" && <Fabricate setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} contract={fabricateContract}/>}

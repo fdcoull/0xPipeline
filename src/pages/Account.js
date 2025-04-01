@@ -32,10 +32,6 @@ const Account = ({ setView, account, loadBlockchainData, pipelineContract }) => 
                 setMaterialProviders(materials);
                 setTransportProviders(transactions);
                 setFabricateProviders(fabrications);
-
-                console.log('Material Providers:', materialProviders);
-                console.log('Transaction Providers:', transportProviders);
-                console.log('Fabrication Providers:', fabricateProviders);
                 
             } catch (error) {
                 console.error("Error loading providers:", error);
