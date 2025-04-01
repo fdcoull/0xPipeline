@@ -4,6 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { useEffect, useState } from 'react';
+import { ethers } from 'ethers'
 
 import Table from "react-bootstrap/Table";
 import Modal from "react-bootstrap/Modal";
@@ -14,21 +15,14 @@ import Nav from "react-bootstrap/Nav";
 import MaterialControl from '../abis/MaterialControl.json';
 
 const AccountMaterial = ({ setView, account, loadBlockchainData, pipelineContract, signer }) => {
-    const [materialProviders, setMaterialProviders] = useState([]);
-    const [transportProviders, setTransportProviders] = useState([]);
-    const [fabricateProviders, setFabricateProviders] = useState([]);
-
-    // Form state
-    const [showAddProvider, setShowAddProvider] = useState(false);
-    const [selectedProviderType, setSelectedProviderType] = useState("");
-    const [newProviderAddress, setNewProviderAddress] = useState("");
+    const [providerMaterials, setProviderMaterials] = useState([]);
 
     const loadMaterialData = async () => {
         if (!pipelineContract || !signer) return;
 
         try {
             const materialProviders = await pipelineContract.getAllMaterialProviders();
-            const providerMaterialsMap = {};
+            const providerMaterialsArray = [];
 
             // Loop through providers
             for (const provider of materialProviders) {
@@ -51,10 +45,10 @@ const AccountMaterial = ({ setView, account, loadBlockchainData, pipelineContrac
                     });
                 }
 
-                console.log(materials);
-
-                providerMaterialsMap[provider] = materials;
+                providerMaterialsArray.push({ provider, materials })
             }
+
+            setProviderMaterials(providerMaterialsArray);
             
         } catch (err) {
             console.error("Error loading provider data:", err);
@@ -70,23 +64,34 @@ const AccountMaterial = ({ setView, account, loadBlockchainData, pipelineContrac
     return (
         <Container fluid>
             <h2>Material Providers</h2>
-            {account ? (
-                <>
-                <h3>Material Providers</h3>
-                <Button variant="warning" onClick={() => {setShowAddProvider(true); setSelectedProviderType("material");}}>Add</Button>
-                <ul>
-                    {materialProviders.length > 0 ? (
-                        materialProviders.map((provider, index) => (
-                            <li key={index}>{provider}</li>
-                        ))
-                    ) : (
-                        <p>No material providers added yet.</p>
-                    )}
-                </ul>
-                </>
-            ) : (
-                <p>Please connect to your wallet.</p>
-            )}
+            {providerMaterials.map((providerData) => (
+            <div key={providerData.provider}>
+                <h4>{providerData.provider}</h4>
+                <Table striped bordered hover>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>QTY</th>
+                            <th>QTY Unit</th>
+                            <th>Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {providerData.materials.map((material) => (
+                            <tr key={material.id}>
+                                <td>{material.id}</td>
+                                <td>{material.name}</td>
+                                <td>{material.quantity}</td>
+                                <td>{material.quantity_unit}</td>
+                                <td>{material.cost}</td>
+                                <td><Button variant="warning" onClick={() => buyMaterial(providerData.provider, material.id, material.cost)}>Buy</Button></td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </Table>
+            </div>
+        ))}
         </Container>
     );
 }
