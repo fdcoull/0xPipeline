@@ -15,7 +15,7 @@ const Home = ({ setView }) => {
             <hr/>
             <Row className="justify-content-center g-3">
                 <Col xs={8} className="d-flex justify-content-center mb-4">
-                <Card onClick={() => setView("material")} className="m-4">
+                <Card onClick={() => setView("account")} className="m-4">
                     <Card.Img variant="top" src="0xp-short.png"/>
                     <Card.Body className="mt-auto">
                         <Card.Title>Manage Account</Card.Title>

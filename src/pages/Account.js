@@ -23,11 +23,9 @@ const Account = ({ setView, account, loadBlockchainData, pipelineContract }) => 
     const loadProviderData = async () => {
         if (pipelineContract) {
             try {
-                const [materials, transactions, fabrications] = await Promise.all([
-                    pipelineContract.getAllMaterialProviders(),
-                    pipelineContract.getAllTransportProviders(),
-                    pipelineContract.getAllFabricateProviders()
-                ]);
+                const materials = await pipelineContract.getAllMaterialProviders();
+                const transactions = await pipelineContract.getAllTransportProviders();
+                const fabrications = await pipelineContract.getAllFabricateProviders();
 
                 setMaterialProviders(materials);
                 setTransportProviders(transactions);
@@ -72,6 +70,7 @@ const Account = ({ setView, account, loadBlockchainData, pipelineContract }) => 
             <Button variant="info" onClick={() => loadBlockchainData()}>Login</Button>
             <p>Connected account: {account}</p>
 
+            <hr/>
             {account ? (
                 <>
                 <h3>Material Providers</h3>
