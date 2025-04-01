@@ -50,17 +50,30 @@ const AccountTransport = ({ setView, account, loadBlockchainData, pipelineContra
                 for (const address of transportProviderAddresses) {
                     const transportProvider = new ethers.Contract(address, TransportControl, signer);
 
-                    const shipments = await transportProvider.shipments();
+                    const shipmentCount = await transportProvider.shipmentCount();
 
-                    const myShipments = shipments.filter(([senderOrderNo, sender]) => sender === account);
+                    for (let i = 0; i < shipmentCount; i++) {
+                        const shipment = await transportProvider.shipments(i);
 
-                    myShipments.forEach(([senderOrderNo]) => {
-                        shippedOrderNumbers.add(orderNumber.toString());
-                        shippedOrders.push({
-                            ...loadedOrders.find(order => order.id === orderNumber.toString()),
-                            carrier: address
-                        });
-                    });
+                        const { senderOrderNo, sender, recipient, status, method, cost, weight } = shipment;
+
+                        if (sender === account) {
+                            shippedOrderNumbers.add(senderOrderNo.toString());
+
+                            const order = loadedOrders.find(order => order.id === senderOrderNo.toString());
+
+                            if (order) {
+                                shippedOrders.push({
+                                    ...order,
+                                    carrier: address,
+                                    shipmentMethod: method,
+                                    shipmentStatus: status,
+                                    shipmentCost: cost,
+                                    shipmentWeight: weight,
+                                })
+                            }
+                        }
+                    }
                 }
 
                 loadedOrders.forEach(order => {
