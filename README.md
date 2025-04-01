@@ -60,7 +60,11 @@ A blockchain based supply chain management system built with Solidity and React.
 ## Changelog
 ### 1.1.0
 * Added providers to pipeline contract
-* Added pipeline deploy script 
+* Added pipeline deploy script
+* Added provider list to admin
+* Added increase part stock function to fabricate contract
+* Added material provider view
+* Added material provider purchases
 
 ### 1.0.0
 * Add part fabricate feature added
