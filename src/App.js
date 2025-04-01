@@ -80,7 +80,7 @@ function App() {
       {view === "home" && <Home setView={setView} view={view}/>}
       {view === "account" && <Account setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} pipelineContract={pipelineContract}/>}
       {view === "account.material" && <AccountMaterial setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} pipelineContract={pipelineContract} fabricateContract={fabricateContract} signer={signer}/>}
-      {view === "account.fabricate" && <AccountFabricate setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} pipelineContract={pipelineContract} fabricateContract={fabricateContract} signer={signer}/>}
+      {view === "account.fabricate" && <AccountFabricate setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} pipelineContract={pipelineContract} myFabricateContract={fabricateContract} signer={signer}/>}
       {view === "material" && <Material setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} contract={materialContract}/>}
       {view === "material.orders" && <MaterialOrders setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} contract={materialContract}/>}
       {view === "fabricate" && <Fabricate setView={setView} view={view} loadBlockchainData={loadBlockchainData} account={account} contract={fabricateContract}/>}

@@ -12,9 +12,9 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 
 // ABI
-import FabricateControl from '../abis/MaterialControl.json';
+import FabricateControl from '../abis/FabricateControl.json';
 
-const AccountMaterial = ({ setView, account, loadBlockchainData, pipelineContract, signer, fabricateContract }) => {
+const AccountMaterial = ({ setView, account, loadBlockchainData, pipelineContract, signer, myFabricateContract }) => {
     const [providerProducts, setProviderProducts] = useState([]);
     
     const loadMaterialData = async () => {
