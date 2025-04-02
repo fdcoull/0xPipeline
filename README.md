@@ -32,12 +32,14 @@ A blockchain based supply chain management system built with Solidity and React.
 * Run `npx hardhat ignition deploy ignition/modules/MaterialControl.js --network localhost`
 * Run `npx hardhat ignition deploy ignition/modules/FabricateControl.js --network localhost`
 * Run `npx hardhat ignition deploy ignition/modules/TransportControl.js --network localhost`
+* Run `npx hardhat ignition deploy ignition/modules/Pipeline.js --network localhost`
+* Run (optional sample contracts) `npx hardhat ignition deploy ignition/modules/SampleData.js --network localhost`
 * Copy each of the deployed addresses from the output into the .env file, using the following format:
 
 `REACT_APP_MATERIAL_CONTROL_ADDRESS=`  
 `REACT_APP_FABRICATE_CONTROL_ADDRESS=`  
 `REACT_APP_TRANSPORT_CONTROL_ADDRESS=`  
-
+`REACT_APP_PIPELINE_ADDRESS=`  
 
 ### React Frontend
 * Run `npm run start`
@@ -52,16 +54,56 @@ A blockchain based supply chain management system built with Solidity and React.
 * Click on login, login to metamask, and you will see your public address show at the bottom of the page as well as on the navbar next to the user icon.
 
 ### Material
+* Materials
+    - Materials appear on the home page
+    - New materials can be listed via the List Material button
+    - Batches can be added via the Add Batch button
+* Orders
+    - Contains list of orders from your Material contract
+    - Manually create an order by clicking Add Order
 
 ### Fabricate
+* Parts
+    - A list of your parts will appear on the main page
+    - Add new parts by clicking Add Part
+* BOMs
+    - Bills of Materials appear on this page
+    - Create a new BOM by clicking add BOM
+    - Clicking on a BOM row will show the list of each BOM's components
+* Products
+    - The products on this page are created when you create a BOM, with an initial stock of 0
+    - Create a product by clicking Manufacture Product, this will increase product stock and decrease part stock by BOM components 
+* Orders
+    - Contains list of orders from your Fabricate contract
+    - Manually create an order by clicking Add Order
 
 ### Transport
+* Shipments
+    - Contract shipments are listed on the main page
+    - Create a new shipment by clicking Add
+
+### Account - Providers
+Navigate to Account to view your saved suppliers or add to your list. These are other suppliers, fabricators, and carriers that have implemented the 0xPipeline system. Each type of organisation can be added by clicking the respective Add button and adding a contract address for one of your contacts.  
+
+* Material Providers
+    - Catalogs of your saved Material providers are presented on this page
+    - From here you can click Buy to submit an order and the item will be added to your Fabricate parts inventory
+
+* Fabricate Providers
+    - Catalogs of your saved Fabricate providers will appear here
+    - Similar to above, you can click Buy to create an order
+
+* Transport Providers
+    - A list of unshipped orders will appear here and underneath, a list of orders that have been shipped and by which Transport contract
+    - From here, click Ship next to an unshipped order to begin the shipping process where you can choose a courier and shipping method
 
 ## Changelog
 ### 1.3.1
 * Added admin link to home
 * Fixed home positioning
 * Fixed admin page loading issue
+* Added refresh buttons
+* Updated instructions
 
 ### 1.3.0
 * Added transport provider view
