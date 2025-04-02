@@ -41,6 +41,20 @@ A blockchain based supply chain management system built with Solidity and React.
 `REACT_APP_TRANSPORT_CONTROL_ADDRESS=`  
 `REACT_APP_PIPELINE_ADDRESS=`  
 
+### Set Metamask to Hardhat Network
+* Open Metamask
+* Select dropdown at top right to change network > Add Custom Network
+* Fill in details (For virtual blockchain):
+    - Network Name: Hardhat
+    - Default RPC URL: http://127.0.0.1:8545
+    - Chain ID: 31337
+    - Currency Symbol: ETH
+* Now from Metamask Home > Account Dropdown > Add Account > Import Account
+* On Hardhat's virtual blockchain it's recommended to use the first PRIVATE key that is output from your running instance of `npx hardhat node`
+* Click Import
+* Select the newly imported account
+* If a virtual balance doesn't appear (balance stays at 0), restart your browser
+
 ### React Frontend
 * Run `npm run start`
 * Keep this running as it is required for viewing the web app.
