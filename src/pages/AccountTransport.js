@@ -147,6 +147,7 @@ const AccountTransport = ({ setView, account, loadBlockchainData, pipelineContra
             <h2>Transport Providers</h2>
             {account && transportProviders && (
             <>
+            <Button variant="secondary" onClick={() => loadContractData()}><i className="bi bi-arrow-clockwise"></i></Button>
             <h3>Unshipped Orders</h3>
             <Table striped bordered hover>
                 <thead>

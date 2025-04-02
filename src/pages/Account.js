@@ -108,6 +108,7 @@ const Account = ({ setView, account, loadBlockchainData, pipelineContract }) => 
                         <p>No transport providers added yet.</p>
                     )}
                 </ul>
+                <Button variant="secondary" onClick={() => loadProviderData()}><i className="bi bi-arrow-clockwise"></i></Button>
                 </>
             ) : (
                 <p>Please connect to your wallet.</p>

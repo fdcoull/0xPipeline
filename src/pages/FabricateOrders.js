@@ -91,6 +91,7 @@ const FabricateOrders = ({ setView, view, account, loadBlockchainData, contract 
             <h2>Orders</h2>
             <Nav.Item>
                 <Button variant="danger" className="m-1" onClick={() => setShowAddOrder(true)}>Add Order</Button>
+                <Button variant="secondary" onClick={() => loadContractData()}><i className="bi bi-arrow-clockwise"></i></Button>
             </Nav.Item>
             {orders.length > 0 ? (
             <Table striped bordered hover>

@@ -82,6 +82,7 @@ const FabricateProducts = ({ setView, view, account, loadBlockchainData, contrac
             <h2>Products</h2>
             <Nav.Item>
                 <Button variant="danger" onClick={() => setShowManufactureProduct(true)}>Manufacture Product</Button>
+                <Button variant="secondary" onClick={() => loadContractData()}><i className="bi bi-arrow-clockwise"></i></Button>
             </Nav.Item>
             {products.length > 0 ? (
             <Table striped bordered hover>

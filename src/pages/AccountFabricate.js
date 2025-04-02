@@ -125,6 +125,8 @@ const AccountFabricate = ({ setView, account, loadBlockchainData, pipelineContra
         <Container fluid>
             <h2>Fabricate Providers</h2>
             {providerProducts.map((providerData) => (
+                <>
+                <Button variant="secondary" onClick={() => loadFabricateData()}><i className="bi bi-arrow-clockwise"></i></Button>
             <div key={providerData.provider}>
                 <h4>{providerData.provider}</h4>
                 <Table striped bordered hover>
@@ -151,6 +153,7 @@ const AccountFabricate = ({ setView, account, loadBlockchainData, pipelineContra
                     </tbody>
                 </Table>
             </div>
+            </>
         ))}
         <Modal show={showBuyModal} onHide={() => setShowBuyModal(false)} centered>
         <Modal.Header closeButton>

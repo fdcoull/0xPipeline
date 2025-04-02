@@ -123,6 +123,7 @@ const Material = ({ setView, view, account, loadBlockchainData, contract }) => {
             <Nav.Item>
                 <Button variant="warning" className="m-1" onClick={() => setShowListMaterial(true)}>List Material</Button>
                 <Button variant="warning" className="m-1" onClick={() => setShowAddBatch(true)}>Add Batch</Button>
+                <Button variant="secondary" onClick={() => loadContractData()}><i className="bi bi-arrow-clockwise"></i></Button>
             </Nav.Item>
             {materials.length > 0 ? (
             <Table striped bordered hover>

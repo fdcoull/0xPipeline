@@ -123,6 +123,7 @@ const FabricateBOMs = ({ setView, view, account, loadBlockchainData, contract })
             <h2>BOMs</h2>
             <Nav.Item>
                 <Button variant="danger" className="m-1" onClick={() => setShowAddBom(true)}>Add BOM</Button>
+                <Button variant="secondary" onClick={() => loadContractData()}><i className="bi bi-arrow-clockwise"></i></Button>
             </Nav.Item>
             {boms.length > 0 ? (
             <Table striped bordered hover>
