@@ -112,6 +112,10 @@ Navigate to Account to view your saved suppliers or add to your list. These are 
     - From here, click Ship next to an unshipped order to begin the shipping process where you can choose a courier and shipping method
 
 ## Changelog
+### 1.3.2
+* Fixed Material test
+* Fixed Fabricate test
+
 ### 1.3.1
 * Added admin link to home
 * Fixed home positioning

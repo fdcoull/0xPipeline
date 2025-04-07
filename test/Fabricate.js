@@ -17,7 +17,6 @@ describe("Fabricate Control", function () {
 
         // Parts
         transaction = await fabricateControl.connect(deployer).addNewPart(
-            1,
             "Steel sheet metal",
             100,
             "KG",
@@ -26,7 +25,6 @@ describe("Fabricate Control", function () {
         await transaction.wait();
 
         transaction = await fabricateControl.connect(deployer).addNewPart(
-            2,
             "Steel tube metal",
             50,
             "KG",
@@ -43,7 +41,7 @@ describe("Fabricate Control", function () {
         const quantity_unit = "units";
         const cost = 100;
 
-        transaction = await fabricateControl.connect(deployer).addNewBomProduct(1, components, name, quantity_unit, cost);
+        transaction = await fabricateControl.connect(deployer).addNewBomProduct(components, name, quantity_unit, cost);
         await transaction.wait();
     });
 
