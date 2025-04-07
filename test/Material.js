@@ -5,7 +5,6 @@ const {
 const { anyValue } = require("@nomicfoundation/hardhat-chai-matchers/withArgs");
 const { expect } = require("chai");
 
-const ID = 1;
 const NAME = "Iron";
 const QUANTITY = 0;
 const QUANTITY_UNIT = "KG";
@@ -22,7 +21,6 @@ describe("Material Control", function () {
         materialControl = await MaterialControl.deploy();
 
         transaction = await materialControl.connect(deployer).list(
-            ID,
             NAME,
             QUANTITY,
             QUANTITY_UNIT,
@@ -47,7 +45,7 @@ describe("Material Control", function () {
         // });
 
         it("Returns material details", async function () {
-            const material = await materialControl.materials(ID);
+            const material = await materialControl.materials(1);
             expect(material.name).to.equal(NAME);
             expect(material.quantity).to.equal(QUANTITY);
             expect(material.quantity_unit).to.equal(QUANTITY_UNIT);
@@ -55,7 +53,7 @@ describe("Material Control", function () {
         });
 
         it("Sets default stock to zero", async function () {
-            const material = await materialControl.materials(ID)
+            const material = await materialControl.materials(1)
             expect(material.quantity).to.equal(0);
         });
     });
@@ -63,9 +61,9 @@ describe("Material Control", function () {
     describe("Batch addition", function () {
         it("Increases the stock level", async function () {
             const batchTotal = 300;
-            transaction = await materialControl.connect(deployer).addBatch(ID, batchTotal);
+            transaction = await materialControl.connect(deployer).addBatch(1, batchTotal);
             await transaction.wait();
-            const material = await materialControl.materials(ID);
+            const material = await materialControl.materials(1);
 
             expect(material.quantity).to.equal(batchTotal);
         });
@@ -74,12 +72,12 @@ describe("Material Control", function () {
     describe("Purchases", function () {
         beforeEach(async () => {
             // Add to stock
-            transaction = await materialControl.connect(deployer).addBatch(ID, 10);
+            transaction = await materialControl.connect(deployer).addBatch(1, 10);
             await transaction.wait();
 
             // Create order
             const buyQuantity = 5;
-            transaction = await materialControl.connect(buyer).buy(ID, buyQuantity, {value: buyQuantity * COST});
+            transaction = await materialControl.connect(buyer).buy(1, buyQuantity, {value: buyQuantity * COST});
             await transaction.wait();
 
         });
@@ -96,7 +94,7 @@ describe("Material Control", function () {
         });
 
         it("Reduces stock", async function () {
-            const material = await materialControl.materials(ID);
+            const material = await materialControl.materials(1);
             expect(material.quantity).to.equal(10 - 5);
         });
     });
